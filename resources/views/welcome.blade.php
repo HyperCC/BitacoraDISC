@@ -1,100 +1,33 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('helpers.template')
 
-        <title>Laravel</title>
+@section('title_head', 'Usuario | $user->name')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+@section('content_body')
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
+    <div class="container">
 
-            .full-height {
-                height: 100vh;
-            }
+        <div class="row py-3">
+            <div class="col-12 col-lg-6">
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+                <h1 class="display-4 text-primary py-3">Bitacora UCN </h1>
+                <p class="lead text-secondary pb-3">
+                    Bitácora Web para el seguimiento y control de los trabajos de titulación del DISC
+                </p>
 
-            .position-ref {
-                position: relative;
-            }
+                @auth
+                    <h4 class="pt-3"> Hola {{ auth()->user()->name }} | {{ auth()->user()->email }}</h4>
+                @else
+                    <div class="pt-3">
+                        <p for="the_login" class="text-primary text-xl-center">¡Para continuar debes ingresar con tu cuenta!</p>
+                        <a href="{{ route('login') }}" class="btn btn-primary btn-block btn-lg rounded-pill">Login</a>
+                    </div>
+                @endauth
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+            </div>
+            <div class="col-12 col-lg-6">
+                <img class="img-fluid my-4" src="img/bookmarks.svg" alt="actividades bitacora ucn">
             </div>
         </div>
-    </body>
-</html>
+    </div>
+
+@endsection
