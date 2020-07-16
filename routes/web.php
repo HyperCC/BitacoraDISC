@@ -40,6 +40,7 @@ Route::group([
 // mostrar todos los usuarios en DB.
     Route::get('users-index/', 'UserController@index')->name('users-index');
 
+
 // Ruta para la creacion de un usuario.
     Route::get('users-create/', 'UserController@create')->name('users-create');
 //Ruta para almacenar un usuario.
@@ -58,9 +59,12 @@ Route::group([
 });
 
 
-Route::get('/bitacoras-index/','BitacoraController@index')->name('bitacoras-index');
-Route::get('/bitacoras-edit/{bitacora}', 'BitacoraController@edit')->name('bitacoras-edit');
-Route::get('/bitacoras-create/', 'BitacoraController@create')->name('bitacoras-create');
-
+Route::get('bitacoras-index/','BitacoraController@index')->name('bitacoras-index');
+Route::get('bitacoras-edit/{bitacora}', 'BitacoraController@edit')->name('bitacoras-edit');
+Route::get('bitacoras-create/', 'BitacoraController@create')->name('bitacoras-create');
+Route::post('bitacoras-store/', 'BitacoraController@store')->name('bitacoras-store');
+Route::get('bitacoras-show/{bitacora}', 'BitacoraController@show')->name('bitacoras-show');
+Route::patch('bitacoras-update/{bitacora}', 'BitacoraController@update')->name('bitacoras-update');
+Route::patch('bitacoras-remover/{bitacora}', 'BitacoraController@remover')->name('bitacoras-remover');
 Route::get('/home', 'HomeController@index')->name('home');
 

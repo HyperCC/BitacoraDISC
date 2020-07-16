@@ -19,8 +19,24 @@
 
                         {{ __('You are logged in!') }}
                     </div>
+                    @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Encargado Titulación')
+                    <div class="card-body">
+                            <a href="{{ route('bitacoras-create') }}">Crear Bitacoras</a>
+                    </div>
+                    <div class="card-body">
+                            <a href="{{ route('bitacoras-index') }}">Bitacoras Activas</a>
+                    </div>
+                    @endif
+                    @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Secretaria')
+                    <div class="card-body">
+                            <a href="{{ route('bitacoras-create') }}">Crear Bitacoras</a>
+                    </div>
+                    <div class="card-body">
+                            <a href="{{ route('bitacoras-index') }}">Bitacoras Activas</a>
+                    </div>
 
-                    @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Admin' || 'Secretaria')
+                    @endif
+                    @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Admin')
                         <div class="card-body">
                             <a href="{{ route('users-create') }}">Crear Usuario</a>
                         </div>
@@ -34,7 +50,7 @@
                         </div>
 
                     @endif
-
+                    
                     <div class="card-body">
                         <h4> Hello {{ auth()->user()->email }}</h4>
                     </div>

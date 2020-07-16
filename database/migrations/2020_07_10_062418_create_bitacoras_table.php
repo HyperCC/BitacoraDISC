@@ -21,9 +21,14 @@ class CreateBitacorasTable extends Migration
             // como tiene relacion muchos a uno debe tener este id a 1 profesor.
             $table->string("id_profesor");
             // como tiene relacion muchos a uno debe tener este id a 1 registro.
-            $table->string("id_registro");
+            $table->string("id_registro")->default("ninguno");
             // estado de bitacora. Posibles casos: no continuidad del trabajo o aprobación del término del trabajo.
-            $table->enum("estado", ["renuncia", "aprobacion"])->deault(null);
+            $table->enum("estado", ["renuncia", "aprobacion"])->default(null);
+
+            // claves foraneas
+            // $table->foreign("id_estudiante")->references("id")->on("users");
+            // $table->foreign("id_profesor")->references("id")->on("users");
+
             $table->timestamps();
         });
     }
