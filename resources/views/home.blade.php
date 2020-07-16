@@ -20,7 +20,7 @@
                         {{ __('You are logged in!') }}
                     </div>
 
-                    @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Admin')
+                    @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Admin' || 'Secretaria')
                         <div class="card-body">
                             <a href="{{ route('users-create') }}">Crear Usuario</a>
                         </div>

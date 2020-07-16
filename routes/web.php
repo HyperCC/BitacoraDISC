@@ -57,5 +57,10 @@ Route::group([
     Route::patch('users-remover/{user}', 'UserController@remover')->name('users-remover');
 });
 
+
+Route::get('/bitacoras-index/','BitacoraController@index')->name('bitacoras-index');
+Route::get('/bitacoras-edit/{bitacora}', 'BitacoraController@edit')->name('bitacoras-edit');
+Route::get('/bitacoras-create/', 'BitacoraController@create')->name('bitacoras-create');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
