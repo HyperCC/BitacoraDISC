@@ -1,46 +1,52 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="utf-8"/>
-    <title>Laradex</title>
+@extends('helpers.template')
 
-    <link rel="stylesheet" href="/css/app.css">
-    <script src="/js/app.js" defer></script>
+@section('title_head', 'Crear Usuario')
 
-</head>
-<body>
+@section('content_body')
 
-<h1 class="display-4">CREAR USUARIO</h1>
+    <div class="container" style=".container { background: gray; min-height: 80vh; }">
 
-<hr>
-<br>
+        @extends('helpers.validate_errors')
 
-<form class="bg-white shadow rounded" method="POST" action="{{ route('users-store') }}">
-    @csrf
-    <div class="form-group">
-        <label for="email"> Correo </label>
-        <input name="email" type="email">
+        <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{ route('users-store') }}">
+            @csrf
+            <h2>Crear Usuario</h2>
+
+            <div>
+                <label for="name"> Nombre </label>
+                <input class="form-control shadow-sm" name="name" type="text">
+            </div>
+
+            <div class="form-group">
+                <label for="email"> Correo </label>
+                <input class="form-control shadow-sm" name="email" type="email" required>
+            </div>
+
+            <div>
+                <label for="name"> Rut </label>
+                <input class="form-control shadow-sm" name="rut" type="text">
+            </div>
+
+            <div class="form-group">
+                <label for="password"> Contraseña </label>
+                <input class="form-control shadow-sm" name="password" type="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="rol"> Rol </label>
+                <select class="form-control shadow-sm" name="rol">
+                    <option>Estudiante</option>
+                    <option>Profesor</option>
+                    <option>Secretaria</option>
+                    <option>Encargado Titulación</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Crear</button>
+            <a class="btn btn-link btn-block" href="{{route('home')}}">Cancelar</a>
+
+        </form>
+
     </div>
 
-    <div class="form-group">
-        <label for="password"> Contraseña </label>
-        <input name="password" type="password">
-    </div>
-
-    <div class="form-group">
-        <label for="rol"> Rol </label>
-        <select name="rol">
-            <option>Estudiante</option>
-            <option>Profesor</option>
-            <option>Secretaria</option>
-            <option>Encargado Titulación</option>
-        </select>
-    </div>
-
-    <button type="submit" class="btn btn-primary">Crear</button>
-    <a class="btn btn-link" href="{{route('home')}}">Cancelar</a>
-
-</form>
-
-</body>
-</html>
+@endsection

@@ -4,6 +4,8 @@
 
 @section('content_body')
 
+
+
     <div class="container">
 
         @include('helpers.validate_errors')
