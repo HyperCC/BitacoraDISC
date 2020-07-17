@@ -92,8 +92,19 @@ class UserController extends Controller
     {
         $scndRol = 'ninguno';
 
+        //en caso de que el rol sea encargado de titulacion, el rol secundario sera Profesor.
         if (!strcmp('Encargado Titulación', request('rol'))) {
             $scndRol = 'Profesor';
+        }
+
+        //en caso de no cambiar la contraseña, no se crea un nuevo hash, se mantiene el anterior.
+        $oldPassword = $user->password;
+        $newPassword = request('password');
+
+        if (strcmp($newPassword, "")) {
+            $newPassword = Hash::make(request('password'));
+        } else {
+            $newPassword = $oldPassword;
         }
 
         $user->update([
@@ -103,7 +114,7 @@ class UserController extends Controller
             'carrera' => request('carrera'),
             'rol' => request('rol'),
             'rol_secundario' => $scndRol,
-            'password' => bcrypt(request('password'))
+            'password' => $newPassword
         ]);
 
         return redirect()->route('users-show', $user);

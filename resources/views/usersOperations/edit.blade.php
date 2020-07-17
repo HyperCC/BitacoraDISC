@@ -4,8 +4,6 @@
 
 @section('content_body')
 
-
-
     <div class="container">
 
         @include('helpers.validate_errors')
@@ -53,12 +51,11 @@
                 </select>
             </div>
 
-            <!-- por el momento da error de seguridad esta manera de cambiar la clave
+            <!-- por el momento da error de seguridad esta manera de cambiar la clave -->
             <div class="form-group">
-                <label for="password"> Contraseña </label>
-                <input class="form-control shadow-sm" name="password" type="password">
+                <label for="password"> Nueva Contraseña </label>
+                <input class="form-control shadow-sm" name="password" type="password" value="">
             </div>
-            -->
 
             <button class="btn btn-primary btn-lg btn-block" type="submit"> Guardar</button>
             <a class="btn btn-link btn-block" href="{{ route('users-index') }}"> Cancelar </a>
