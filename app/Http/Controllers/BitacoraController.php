@@ -16,7 +16,8 @@ class BitacoraController extends Controller
     public function index()
     {
         return view('bitacorass.index', [
-        'bitacora' => Bitacora::paginate()
+        'bitacora' => Bitacora::paginate(),
+        'user' => User::paginate()
         ]);
         
     }
@@ -43,8 +44,12 @@ class BitacoraController extends Controller
     {
         Bitacora::create([
             'titulo' => request('titulo'),
-            'id_estudiante' => request('id_estudiante'),
-            'id_profesor' => request('id_profesor'),
+            'id_estudiante1' => request('id_estudiante1'),
+            'id_estudiante2' => request('id_estudiante2'),
+            'id_estudiante3' => request('id_estudiante3'),
+            'id_estudiante4' => request('id_estudiante4'),
+            'id_profesor1' => request('id_profesor1'),
+            'id_profesor2' => request('id_profesor2'),
             
         ]);
 
