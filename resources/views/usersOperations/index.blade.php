@@ -4,9 +4,9 @@
 
 @section('content_body')
 
-    <div class="container">
+    <div class="container text-center">
 
-        <h1 class="display-2 my-3 text-center"> Todos los Usuarios registrados</h1>
+        <span class="display-3 my-4"> Todos los Usuarios activos</span>
 
         <hr>
 
@@ -17,9 +17,8 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">E-mail</th>
                 <th scope="col">Rut</th>
-                <th scope="col">Carrera</th>
                 <th scope="col">Rol</th>
-                <th scope="col">Rol Secundario</th>
+                <th scope="col"> Ver</th>
             </tr>
             </thead>
 
@@ -27,34 +26,12 @@
             @forelse($user as $us)
                 @if($us->estado=='Activo')
                     <tr>
-                        <th type="" scope="row">
-                            <a href="{{route('users-show', $us)}}"
-                               style="text-decoration:none; color:black;"> {{ $us->id }} </a>
-                        </th>
-                        <td>
-                            <a href="{{route('users-show', $us)}}"
-                               style="text-decoration:none; color:black;"> {{ $us->name }} </a>
-                        </td>
-                        <td>
-                            <a href="{{route('users-show', $us)}}"
-                               style="text-decoration:none; color:black;"> {{ $us->email }} </a>
-                        </td>
-                        <td>
-                            <a href="{{route('users-show', $us)}}"
-                               style="text-decoration:none; color:black;"> {{ $us->rut }} </a>
-                        </td>
-                        <td>
-                            <a href="{{route('users-show', $us)}}"
-                               style="text-decoration:none; color:black;"> {{ $us->carrera }} </a>
-                        </td>
-                        <td>
-                            <a href="{{route('users-show', $us)}}"
-                               style="text-decoration:none; color:black;"> {{ $us->rol }} </a>
-                        </td>
-                        <td>
-                            <a href="{{route('users-show', $us)}}"
-                               style="text-decoration:none; color:black;"> {{ $us->rol_secundario }} </a>
-                        </td>
+                        <th scope="row"> {{ $us->id }}</th>
+                        <td> {{ $us->name }}</td>
+                        <td> {{ $us->email }}</td>
+                        <td> {{ $us->rut }}</td>
+                        <td> {{ $us->rol }}</td>
+                        <td><a href="{{route('users-show', $us)}}" class="btn btn-success px-3"> Ver</a></td>
                     </tr>
 
                 @endif

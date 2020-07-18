@@ -18,7 +18,9 @@
                     @csrf
                     @method('PATCH')
 
-                    <h1 class="display-2 text-center">Editar un Usuario</h1>
+                    <div class="text-center">
+                        <span class="display-3">Editar un Usuario</span>
+                    </div>
 
                     <hr>
 

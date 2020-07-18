@@ -57,12 +57,12 @@ class UserController extends Controller
         }
 
         $newName = 'ninguno';
-        if (strcmp($newName, "")) {
+        if (!strcmp($newName, "")) {
             $newName = \request('name');
         }
 
         $newRut = 'ninguno';
-        if (strcmp($newRut, "")) {
+        if (!strcmp($newRut, "")) {
             $newRut = \request('rut');
         }
 

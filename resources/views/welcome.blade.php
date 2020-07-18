@@ -9,7 +9,8 @@
         <div class="row py-3">
             <div class="col-12 col-lg-6">
 
-                <p class="display-3 text-primary py-3">Bitacora DISC </p>
+                <h1 class="display-2 text-primary py-3">Bitacora DISC </h1>
+
                 <p class="lead text-secondary pb-3">
                     Bitácora Web para el seguimiento y control de los trabajos de titulación del DISC
                 </p>
