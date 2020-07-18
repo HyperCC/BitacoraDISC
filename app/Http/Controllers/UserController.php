@@ -22,6 +22,13 @@ class UserController extends Controller
         ]);
     }
 
+    public function deleteds()
+    {
+        return view('usersOperations.deleteds', [
+            'user' => User::paginate()
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -42,13 +49,32 @@ class UserController extends Controller
      */
     public function store()
     {
+        $scndRol = 'ninguno';
+
+        //en caso de que el rol sea encargado de titulacion, el rol secundario sera Profesor.
+        if (!strcmp('Encargado Titulación', request('rol'))) {
+            $scndRol = 'Profesor';
+        }
+
+        $newName = 'ninguno';
+        if (strcmp($newName, "")) {
+            $newName = \request('name');
+        }
+
+        $newRut = 'ninguno';
+        if (strcmp($newRut, "")) {
+            $newRut = \request('rut');
+        }
 
         //TODO: en caso de tener doble rol.
         User::create([
-            'email' => request('email'),
+            'name' => $newName,
+            'email' => \request('email'),
+            'rut' => $newRut,
+            'carrera' => \request('carrera'),
             'password' => Hash::make(request('password')),
             'rol' => request('rol'),
-            //'rol_secundario' => request('rol_secundario')
+            'rol_secundario' => $scndRol
         ]);
 
         return redirect()->route('home');
@@ -75,7 +101,6 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-
         return view('usersOperations.edit', [
             'user' => $user
         ]);

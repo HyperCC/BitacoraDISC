@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="card-body">
-                            <a href="#">Usuarios Removidos</a>
+                            <a href="{{ route('users-deleteds')  }}">Usuarios Removidos</a>
                         </div>
                     @endif
 

@@ -39,7 +39,8 @@ Route::group([
 
 // mostrar todos los usuarios en DB.
     Route::get('users-index/', 'UserController@index')->name('users-index');
-
+// mostrar los usuarios removidos en DB.
+    Route::get('users-deleteds/', 'UserController@deleteds')->name('users-deleteds');
 
 // Ruta para la creacion de un usuario.
     Route::get('users-create/', 'UserController@create')->name('users-create');
@@ -59,7 +60,7 @@ Route::group([
 });
 
 
-Route::get('bitacoras-index/','BitacoraController@index')->name('bitacoras-index');
+Route::get('bitacoras-index/', 'BitacoraController@index')->name('bitacoras-index');
 Route::get('bitacoras-edit/{bitacora}', 'BitacoraController@edit')->name('bitacoras-edit');
 Route::get('bitacoras-create/', 'BitacoraController@create')->name('bitacoras-create');
 Route::post('bitacoras-store/', 'BitacoraController@store')->name('bitacoras-store');

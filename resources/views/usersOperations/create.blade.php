@@ -62,8 +62,9 @@
                     <hr>
 
                     <div class="py-3">
-                        <button type="submit" class="btn btn-primary btn-lg btn-block rounded-pill"> Crear </button>
-                        <a class="btn btn-lg btn-block btn-outline-primary rounded-pill" href="{{route('home')}}"> Cancelar </a>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block rounded-pill"> Crear</button>
+                        <a class="btn btn-lg btn-block btn-outline-primary rounded-pill" href="{{route('home')}}">
+                            Cancelar </a>
                     </div>
 
                 </form>

@@ -25,7 +25,7 @@
 
             <tbody>
             @forelse($user as $us)
-                @if($us->estado=='Activo')
+                @if($us->estado=='Removido')
                     <tr>
                         <th type="" scope="row">
                             <a href="{{route('users-show', $us)}}"
@@ -60,7 +60,7 @@
                 @endif
             @empty
                 <tr>
-                    <th> No hay ningún Usuario activo</th>
+                    <th> No hay ningún Usuario removido</th>
                 </tr>
             @endforelse
             </tbody>

@@ -10932,3 +10932,9 @@ a.text-dark:focus {
   height: 100vh;
 }
 
+td a {
+  display: block;
+  border: none;
+  padding: 10px;
+}
+
