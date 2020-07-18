@@ -37,6 +37,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function bitacoras()
+    {
+        return $this->belongsTo(Bitacora::class);
+    }
+
     protected $primaryKey = "id";
 
 }

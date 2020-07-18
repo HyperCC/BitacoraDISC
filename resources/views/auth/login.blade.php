@@ -4,7 +4,7 @@
 
 @section('content_body')
 
-    <div class="container" style=".container { background: gray; min-height: 80vh; }">
+    <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">

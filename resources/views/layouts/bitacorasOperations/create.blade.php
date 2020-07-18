@@ -32,8 +32,6 @@
         <input name="id_profesor" type="number">
     </div>
 
-   
-
     <button type="submit" class="btn btn-primary">Crear</button>
     <a class="btn btn-link" href="{{route('home')}}">Cancelar</a>
 

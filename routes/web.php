@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('list', function () {
+    return view('listas');
+});
+
 Route::get('dashboard', function () {
     return view('dashboard');
 });
