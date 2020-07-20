@@ -10,7 +10,7 @@
 
         <hr>
 
-        <table class="table table-striped table-hover">
+        <table class="table table-hover">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">ID</th>

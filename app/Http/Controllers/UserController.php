@@ -56,13 +56,13 @@ class UserController extends Controller
             $scndRol = 'Profesor';
         }
 
-        $newName = 'ninguno';
-        if (!strcmp($newName, "")) {
+        $newName = 'user';
+        if (strcmp(\request('name'), "")) {
             $newName = \request('name');
         }
 
         $newRut = 'ninguno';
-        if (!strcmp($newRut, "")) {
+        if (strcmp(\request('rut'), "")) {
             $newRut = \request('rut');
         }
 

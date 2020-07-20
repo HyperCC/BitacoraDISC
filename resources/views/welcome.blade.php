@@ -29,6 +29,7 @@
                 @endauth
 
             </div>
+
             <div class="col-12 col-lg-6">
                 <img class="img-fluid py-3" src="img/bookmarks.svg" alt="actividades bitacora ucn">
             </div>

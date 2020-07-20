@@ -5,20 +5,31 @@
 @section('content_body')
     <div class="container">
 
-        <div class="card-deck my-3 text-center">
+        <div class="row">
 
-            <!-- TITULO Y BIENVENIDA AL USUARIO -->
+            <div class="col-12 col-lg-6">
+                <div class="card-deck my-3 text-center">
 
-            <div class="card my-4 box-shadow">
-                <div class="card-header bg-dark py-4">
-                    <h3 class="my-0 font-weight-normal text-light"> Bienvenido Administrador </h3>
+                    <!-- TITULO Y BIENVENIDA AL USUARIO -->
+
+                    <div class="card my-4 box-shadow">
+                        <div class="card-header bg-dark py-4">
+                            <h3 class="my-0 font-weight-normal text-light"> Bienvenido Administrador </h3>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title pircing-card-title py-4"> ¡Bienvenid@ <span
+                                    class="text-primary">{{ auth()->user()->email }}</span> al menú para
+                                Administradores!
+                                <br>
+                                Desde aquí puedes realiza todas tus operacciones de a cuerdo a tu rol.
+                            </h4>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <h4 class="card-title pircing-card-title py-4"> ¡Bienvenid@ <span
-                            class="text-primary">{{ auth()->user()->email }}</span> al menú para Administradores! <br>
-                        Desde aquí puedes realiza todas tus operacciones de a cuerdo a tu rol.
-                    </h4>
-                </div>
+            </div>
+
+            <div class="col-12 col-lg-6">
+                <img class="img-fluid m-lg-3 m-sm-3" src="img/admin_view.svg" alt="administracion bitacora ucn">
             </div>
         </div>
 
