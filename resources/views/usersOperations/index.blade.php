@@ -6,11 +6,11 @@
 
     <div class="container text-center">
 
-        <span class="display-3 my-4"> Todos los Usuarios activos</span>
+        <p class="display-4 my-4"> Todos los Usuarios activos</p>
 
         <hr>
 
-        <table class="table table-hover">
+        <table class="table table-hover table-responsive-md">
             <thead class="thead-dark">
             <tr>
                 <th scope="col">Nombre</th>
@@ -41,7 +41,9 @@
 
         <hr>
 
+
     </div>
+
 
 @endsection
 

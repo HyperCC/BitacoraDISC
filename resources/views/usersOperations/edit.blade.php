@@ -74,7 +74,7 @@
 
                     <div class="py-3">
                         <button class="btn btn-primary btn-lg btn-block rounded-pill" type="submit"> Guardar</button>
-                        <a class="btn btn-lg btn-block btn-outline-primary rounded-pill"
+                        <a class="btn btn-lg btn-block btn-outline-dark rounded-pill"
                            href="{{ route('users-index') }}"> Cancelar </a>
                     </div>
 

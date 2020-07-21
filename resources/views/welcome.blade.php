@@ -6,17 +6,21 @@
 
     <div class="container">
 
-        <div class="row py-3">
+        <div class="row">
             <div class="col-12 col-lg-6">
 
-                <h1 class="display-2 text-primary py-3">Bitacora DISC </h1>
+                <h1 class="display-2 text-primary">Bitacora DISC </h1>
 
                 <p class="lead text-secondary pb-3">
                     Bitácora Web para el seguimiento y control de los trabajos de titulación del DISC
                 </p>
 
                 @auth
-                    <h4 class="pt-3"> Hola {{ auth()->user()->name }} | {{ auth()->user()->email }}</h4>
+                    <div class="pt-3">
+                        <h4 class="text-center ml-4"> Hola {{ auth()->user()->email }} </h4>
+                        <a href="{{ route('home') }}" class="btn btn-info btn-lg btn-block rounded-pill" type="submit"> ¡Comencemos! </a>
+                    </div>
+
                 @else
                     <div class="pt-3">
                         <p for="the_login" class="text-primary text-xl-center font-italic">¡Para continuar debes
@@ -30,9 +34,10 @@
 
             </div>
 
-            <div class="col-12 col-lg-6">
-                <img class="img-fluid py-3" src="img/bookmarks.svg" alt="actividades bitacora ucn">
+            <div class="col-12 col-lg-6 mt-sm-3">
+                <img class="img-fluid py-3" src="img/taking_notes.svg" alt="actividades bitacora ucn">
             </div>
+
         </div>
     </div>
 
