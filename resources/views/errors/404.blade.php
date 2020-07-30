@@ -24,12 +24,13 @@
                 <img class="img-fluid m-lg-3 m-sm-3" src="{{ URL::to('/')}}/img/error404.svg"
                      alt="actividades bitacora ucn">
 
-                <div class="display-4 text-center">
+                <div class="display-4 text-center py-3">
                     <p>Esta dirección no existe :( </p>
                 </div>
 
                 <div>
-                    <a href="{{ \Illuminate\Support\Facades\URL::to('/') }}" class="btn btn-dark text-light rounded-pill btn-lg btn-block">¡Ir al inicio!</a>
+                    <a href="{{ \Illuminate\Support\Facades\URL::to('/') }}"
+                       class="btn btn-dark text-light rounded-pill btn-lg btn-block">¡Volvamos al inicio!</a>
                 </div>
             </div>
 

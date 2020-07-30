@@ -123,6 +123,46 @@
             </div>
         @endif
 
+        @if(\Illuminate\Support\Facades\Auth::user()->rol == ('Estudiante' or 'Admin') )
+            <div class="card-deck my-3 text-center">
+
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header bg-primary">
+                        <h5 class="my-0 font-weight-normal text-light"> Estudiante </h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title pircing-card-title"> Ingresar avance</h3>
+                        <p class="text-muted"> Crear registro de un avance semanal </p>
+                    </div>
+                    <a href="{{ route('avances-create') }}" class="btn m-3 btn-outline-primary rounded-pill">¡A
+                        Crear!</a>
+                </div>
+
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header bg-primary">
+                        <h5 class="my-0 font-weight-normal text-light"> Estudiante </h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title pircing-card-title"> Adjuntar evidencia</h3>
+                        <p class="text-muted"> Se puede adjuntar evidencia a un avance semanal</p>
+                    </div>
+                    <a href="{{ route('bitacoras-index') }}" class="btn m-3 btn-outline-primary rounded-pill">¡A
+                        Crear!</a>
+                </div>
+
+                <div class="card mb-4 box-shadow">
+                    <div class="card-header">
+                        <h5 class="my-0 font-weight-normal text-light"> - </h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title pircing-card-title"></h3>
+                        <p class="text-muted"></p>
+                    </div>
+                    <button disabled class="btn m-3 btn-outline-danger rounded-pill"> -</button>
+                </div>
+            </div>
+        @endif
+
     </div>
 
 @endsection

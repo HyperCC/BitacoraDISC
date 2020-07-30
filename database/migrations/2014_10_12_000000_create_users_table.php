@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments("id");
+            $table->bigIncrements('id');
             // Obligatorio para: Estudiantes, Profesores.
             $table->string('name')->default("usuario");
             $table->string('email')->unique();
@@ -30,6 +30,7 @@ class CreateUsersTable extends Migration
             $table->enum('estado', ['Activo', 'Removido'])->default('Activo');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+
             $table->rememberToken();
             $table->timestamps();
         });

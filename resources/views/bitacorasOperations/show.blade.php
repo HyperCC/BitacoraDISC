@@ -4,7 +4,7 @@
 
 @section('content_body')
 
-    <div class="container" style=".container { background: gray; min-height: 80vh; }">
+    <div class="container">
 
         <a class="btn btn-outline-secondary mb-4" href="{{ route('bitacoras-index') }}">
             Regresar

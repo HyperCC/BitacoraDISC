@@ -37,11 +37,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $primaryKey = "id";
+
     public function bitacoras()
     {
-        return $this->belongsTo(Bitacora::class);
+        return $this->belongsToMany(Bitacora::class)->withTimestamps();
     }
-
-    protected $primaryKey = "id";
 
 }

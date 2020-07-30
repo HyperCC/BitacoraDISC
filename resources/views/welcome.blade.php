@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-12 col-lg-6">
 
-                <h1 class="display-2 text-primary">Bitacora DISC </h1>
+                <h1 class="display-1 text-primary">Bitacora DISC </h1>
 
                 <p class="lead text-secondary pb-3">
                     Bitácora Web para el seguimiento y control de los trabajos de titulación del DISC
@@ -17,7 +17,7 @@
 
                 @auth
                     <div class="pt-3">
-                        <h4 class="text-center ml-4"> Hola {{ auth()->user()->email }} </h4>
+                        <h4 class="text-center ml-4 pb-3"> Hola {{ auth()->user()->email }} </h4>
                         <a href="{{ route('home') }}" class="btn btn-info btn-lg btn-block rounded-pill" type="submit"> ¡Comencemos! </a>
                     </div>
 
