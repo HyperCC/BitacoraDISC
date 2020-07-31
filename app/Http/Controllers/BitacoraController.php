@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use function Sodium\compare;
+use Illuminate\Database\Seeder;
+use App\Http\Controllers\DB;
 
 class BitacoraController extends Controller
 {
@@ -32,9 +34,10 @@ class BitacoraController extends Controller
      */
     public function create()
     {
-        return view('bitacorasOperations.create', [
-            'bitacora' => new Bitacora
-        ]);
+        $usuarios = User::where([['rol', '=', 'Estudiante'],['Disponibilidad', '=', 'Sí']])->get();
+        
+        return view('bitacorasOperations.create', compact('usuarios'));
+
     }
 
     /**

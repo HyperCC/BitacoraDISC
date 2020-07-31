@@ -43,7 +43,7 @@
 
                 <div class="card mb-3 box-shadow">
                     <div class="card-header bg-primary">
-                        <h5 class="my-0 font-weight-normal text-light"> Administrador </h5>
+                        <h5 class="my-0 font-weight-normal text-light">{{\Illuminate\Support\Facades\Auth::user()->rol }} </h5>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title pircing-card-title"> Crear un Usuario</h3>
@@ -54,7 +54,7 @@
 
                 <div class="card mb-3 box-shadow">
                     <div class="card-header bg-success">
-                        <h5 class="my-0 font-weight-normal text-light">Administrador</h5>
+                        <h5 class="my-0 font-weight-normal text-light">{{\Illuminate\Support\Facades\Auth::user()->rol }}</h5>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title pircing-card-title">Ver Usuarios Activos</h3>
@@ -66,7 +66,7 @@
 
                 <div class="card mb-3 box-shadow">
                     <div class="card-header bg-danger">
-                        <h5 class="my-0 font-weight-normal text-light">Administrador</h5>
+                        <h5 class="my-0 font-weight-normal text-light">{{\Illuminate\Support\Facades\Auth::user()->rol }}</h5>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title pircing-card-title">Ver Usuarios Removidos</h3>
@@ -81,13 +81,13 @@
 
     <!-- TOPERACIONES DISPONIBLES PARA LA SECRETARIA -->
 
-        @if(\Illuminate\Support\Facades\Auth::user()->rol == ('Encargado Titulación' or 'Secreataria') )
+        @if(\Illuminate\Support\Facades\Auth::user()->rol == ('Encargado Titulación' or 'Secretaria') )
 
             <div class="card-deck my-3 text-center">
 
                 <div class="card mb-4 box-shadow">
                     <div class="card-header bg-primary">
-                        <h5 class="my-0 font-weight-normal text-light"> Secretaria </h5>
+                        <h5 class="my-0 font-weight-normal text-light"> {{\Illuminate\Support\Facades\Auth::user()->rol }}</h5>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title pircing-card-title"> Crear una Bitacora</h3>
@@ -99,7 +99,7 @@
 
                 <div class="card mb-4 box-shadow">
                     <div class="card-header bg-success">
-                        <h5 class="my-0 font-weight-normal text-light"> Secretaria</h5>
+                        <h5 class="my-0 font-weight-normal text-light"> {{\Illuminate\Support\Facades\Auth::user()->rol }}</h5>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title pircing-card-title">Ver Bitacoras</h3>
@@ -128,7 +128,7 @@
 
                 <div class="card mb-4 box-shadow">
                     <div class="card-header bg-primary">
-                        <h5 class="my-0 font-weight-normal text-light"> Estudiante </h5>
+                        <h5 class="my-0 font-weight-normal text-light">{{\Illuminate\Support\Facades\Auth::user()->rol }}</h5>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title pircing-card-title"> Ingresar avance</h3>
@@ -140,7 +140,7 @@
 
                 <div class="card mb-4 box-shadow">
                     <div class="card-header bg-primary">
-                        <h5 class="my-0 font-weight-normal text-light"> Estudiante </h5>
+                        <h5 class="my-0 font-weight-normal text-light">{{\Illuminate\Support\Facades\Auth::user()->rol }} </h5>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title pircing-card-title"> Adjuntar evidencia</h3>

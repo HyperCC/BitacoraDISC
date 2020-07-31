@@ -26,6 +26,8 @@ class CreateUsersTable extends Migration
             $table->enum('rol', ['Admin', 'Estudiante', 'Profesor', 'Secretaria', 'Encargado Titulación']);
             // El Encargado de Titulación puede además tener el rol de Profesor.
             $table->string("rol_secundario")->default("ninguno");
+            // para saber si el usuario esta o no ya inscrito en una bitacora
+            $table->string("Disponibilidad")->default("Sí");
             // en caso de eliminar a un usuario, solo pasa de Activo a Removido.
             $table->enum('estado', ['Activo', 'Removido'])->default('Activo');
             $table->timestamp('email_verified_at')->nullable();
