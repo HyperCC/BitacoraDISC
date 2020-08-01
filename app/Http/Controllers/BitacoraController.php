@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use function Sodium\compare;
 use Illuminate\Database\Seeder;
 use App\Http\Controllers\DB;
+use App\Http\Requests\BitacoraStoreRequest;
 
 class BitacoraController extends Controller
 {
@@ -34,9 +35,11 @@ class BitacoraController extends Controller
      */
     public function create()
     {
-        $usuarios = User::where([['rol', '=', 'Estudiante'],['Disponibilidad', '=', 'Sí']])->get();
-        
-        return view('bitacorasOperations.create', compact('usuarios'));
+        $estudiantes = User::where([['rol', '=', 'Estudiante'],['Disponibilidad', '=', 'Sí']])->get();
+        $profesores = User::where([['rol', '=', 'Profesor']])->get();
+        return view('bitacorasOperations.create')
+        ->with('usuarios',$estudiantes)
+        ->with('profesores',$profesores); 
 
     }
 
@@ -46,17 +49,68 @@ class BitacoraController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Bitacora $bitacora)
-    {
+    public function store(BitacoraStoreRequest $request)
+    {   
+
         // creacion de la bitacora como tal.
         $bita = Bitacora::create([
             'titulo' => request('titulo'),
             //'estado' => request('estado'),
+            'profesor_id' => $request->input('id_profesor1'),
             'causa_renuncia' => "f"
         ]);
 
-        $bita->Save();
+        $bita->save();
 
+        $estudiante1 = $request->input('est1');
+        $estudiante2 = $request->input('est2');
+        $estudiante3 = $request->input('est3');
+        $estudiante4 = $request->input('est4');
+
+
+        
+
+        $primerEstudiante = User::find($estudiante1);
+        $primerEstudiante->Disponibilidad = 'No';
+        $primerEstudiante->save();
+        $bitacora_user = BitacoraUser::create([
+            'user_id' => $estudiante1,
+            'bitacora_id' => $bita->id
+        ]);
+
+        if($estudiante2 != 0){
+            $segundoEstudiante = User::find($estudiante2);
+            $segundoEstudiante->Disponibilidad = 'No';
+            $segundoEstudiante->save();
+            $bitacora_user2 = BitacoraUser::create([
+                'user_id' => $estudiante2,
+                'bitacora_id' => $bita->id
+            ]);
+        }
+
+        if($estudiante3 != 0){
+            $tercerEstudiante = User::find($estudiante3);
+            $tercerEstudiante->Disponibilidad = 'No';
+            $tercerEstudiante->save();
+            $bitacora_user3 = BitacoraUser::create([
+                'user_id' => $estudiante3,
+                'bitacora_id' => $bita->id
+            ]);
+        }
+
+        if($estudiante4 != 0){
+            $cuartoEstudiante = User::find($estudiante4);
+            $cuartoEstudiante->Disponibilidad = 'No';
+            $cuartoEstudiante->save();
+            $bitacora_user4 = BitacoraUser::create([
+                'user_id' => $estudiante4,
+                'bitacora_id' => $bita->id
+            ]);
+        }
+        
+        return redirect()->route('bitacora.index');
+
+        /*
         // llamado a la asignacion de las relaciones, no se cae aunque solo pongas un estudiante y un profesor.
         $this->asignUsers(request('id_estudiante1'), $bita);
         $this->asignUsers(request('id_estudiante2'), $bita);
@@ -66,6 +120,7 @@ class BitacoraController extends Controller
         $this->asignUsers(request('id_profesor2'), $bita);
 
         return redirect()->route('home');
+        */
     }
 
     // asignacion de relacio entre los usuarios y la bitacora, de 1 a 1
