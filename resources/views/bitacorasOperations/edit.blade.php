@@ -23,35 +23,26 @@
                     <hr>
 
                     <div class="form-group">
-                        <label for="name"> Titulo </label>
-                        <input class="form-control shadow-sm bg-light" name="name" type="text"
+                        <label class="ml-1" for="name"> Titulo </label>
+                        <input class="form-control shadow-sm bg-light" name="titulo" type="text"
                                value="{{ old('titulo', $bitacora->titulo) }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="estado"> Estado </label>
-                        <select class="form-control shadow-sm custom-select" name="estado">
-                            <option @if($bitacora->estado=='Activa') selected @endif>Activa</option>
-                            <option @if($bitacora->estado=='Finalizada') selected @endif>Finalizada</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="causa_renuncia"> Causa Renuncia </label>
-                        <select class="form-control shadow-sm custom-select" name="causa_renuncia">
-                            <option>Ninguna</option>
-                            <option @if($bitacora->causa_renuncia=='No continuidad del trabajo') selected @endif>No
-                                continuidad del trabajo
-                            </option>
-                            <option @if($bitacora->causa_renuncia=='Aprobación del termino de trabajo') selected @endif>
-                                Aprobación del termino de trabajo
-                            </option>
-                        </select>
+                        <label class="form-check-label m-1">¿Desea reactivar esta Bitacora?</label>
+                        <br>
+                        <span class="ml-4">
+                            <input class="form-check-input" type="checkbox" name="estado"
+                                   value="Activa"> Si
+                        </span>
                     </div>
                     <hr>
 
                     <div class="py-3">
-                        <button class="btn btn-primary btn-lg btn-block rounded-pill" type="submit"> Guardar</button>
+                        <button class="btn btn-primary btn-lg btn-block rounded-pill" type="submit">
+                            Guardar
+                        </button>
+
                         <a class="btn btn-lg btn-block btn-outline-dark rounded-pill"
                            href="{{ route('bitacoras-index') }}"> Cancelar </a>
                     </div>

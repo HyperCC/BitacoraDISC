@@ -120,12 +120,13 @@ class BitacoraController extends Controller
      */
     public function update(Bitacora $bitacora)
     {
-
         $bitacora->update([
-            'titulo' => request('titulo')
+            'titulo' => request('titulo'),
+            'estado'=> \request('estado'),
+            'causa_renuncia' => 'ninguna'
         ]);
 
-        return redirect()->route('bitacora-show', $bitacora);
+        return redirect()->route('bitacoras-show', $bitacora);
     }
 
     /**
@@ -136,9 +137,20 @@ class BitacoraController extends Controller
      */
     public function remover(Bitacora $bitacora)
     {
+        //Todo
+        $nuevoEstado = "Activa";
+        $nuevaRazon = "ninguna";
+        if(\request('estado')=='Finalizada')
+        {
+            $nuevoEstado = \request('estado');
+            $nuevaRazon = \request('causaRenuncia');
+        }
+
         $bitacora->update([
-            'estado' => 'Finalizada'
+            'estado' => $nuevoEstado,
+            'causa_renuncia'=>$nuevaRazon
         ]);
+
         return redirect()->route('bitacoras-index', $bitacora);
     }
 

@@ -20,7 +20,7 @@ class CreateBitacorasTable extends Migration
             // estado de bitacora. Posibles casos: no continuidad del trabajo o aprobación del término del trabajo.
             $table->enum("estado", ["Activa", "Finalizada"])->default('Activa');
 
-            $table->text('causa_renuncia')->default(null);
+            $table->text('causa_renuncia')->default('ninguna');
 
             $table->timestamps();
         });
