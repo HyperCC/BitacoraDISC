@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script src="{{ mix('js/app.js') }}" defer></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
 
     <link rel="shortcut icon" href="{{{ asset('img/favicon.png') }}}">
 
@@ -19,50 +21,6 @@
     <header>
         @include('helpers.nav')
     </header>
-
-    
-    <div style="margin-top:20px">
-        @if(session('info'))
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <div class="alert alert-success">
-                            {{ session('info') }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
-
-        @if(session('error'))
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
-        
-        <!-- Mensajes de error -->
-        @if(count($errors))
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-2">
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endif
-    </div>
 
     <main class="py-3">
         @yield('content_body')

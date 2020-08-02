@@ -24,12 +24,12 @@
 
                     <div class="form-group">
                         <label for="name"> Nombre </label>
-                        <input class="form-control shadow-sm bg-light" name="name" type="text" placeholder="Nombre Apellido">
+                        <input class="form-control shadow-sm bg-light" name="name" type="text">
                     </div>
 
                     <div class="form-group">
                         <label for="email"> Correo </label>
-                        <input class="form-control shadow-sm bg-light" name="email" type="email" required placeholder="Ej: ejemplo@email.com">
+                        <input class="form-control shadow-sm bg-light" name="email" type="email" required>
                     </div>
 
                     <div class="form-group">
@@ -43,7 +43,7 @@
 
                     <div class="form-group">
                         <label for="name"> Rut </label>
-                        <input class="form-control shadow-sm bg-light" name="rut" type="text" placeholder="Ej: 11222333-4" >
+                        <input class="form-control shadow-sm bg-light" name="rut" type="text">
                     </div>
 
                     <div class="form-group">

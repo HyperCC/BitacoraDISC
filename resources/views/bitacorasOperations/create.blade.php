@@ -5,160 +5,114 @@
 @section('content_body')
 
 
-<div class="container">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <!-- <script>
-        $(".sel").each(function() {
-            // Al cargar el documento guardo las opciones originales
-            $(this).data('original', $(this).html());
-        });
-        $(document).on('change', '.sel', function() {
-            $('.sel').each(function() {
-                // Restauro  todas las opciones para todos los elementos 
-                var valor = $(this).val();
-                $(this).html($(this).data('original'));
-                $(this).val(valor);
-            });
+    <div class="container">
 
-            $('.sel').each(function() {
-                // borro las opciones  que no están seleccionadas 
-                $(this).siblings().find('option[value="' + $(this).val() + '"]').remove();
-            });
+        <div class="row">
+
+            <div class="col-12 col-sm-10 col-lg-6 mx-auto my-3">
+
+                @extends('helpers.validate_errors')
+
+                <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{ route('bitacoras-store') }}">
+
+                    @csrf
+
+                    <div class="text-center">
+                        <span class="display-3">Crear una Bitacora</span>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group">
+                        <label for="titulo"> Titulo (Campo obligatorio) </label>
+                        <input class="form-control shadow-sm bg-light" name="titulo" type="text" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_estudiante1">Nombre Estudiante 1 (Campo obligatorio)</label>
+                        <select class="form-control" name="id_estudiante1" required>
+
+                            <option>Seleccione</option>
+                            @foreach($estudiantes as $estudiante)
+                                <option value="{{$estudiante->id}}"> {{$estudiante->name}} </option>
+                            @endforeach
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_estudiante2">Nombre Estudiante 2</label>
+                        <select class="form-control" name="id_estudiante2">
+
+                            <option value="">Seleccione</option>
+                            @foreach($estudiantes as $estudiante)
+                                <option value="{{$estudiante->id}}"> {{$estudiante->name}} </option>
+                            @endforeach
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_estudiante3">Nombre Estudiante 3</label>
+                        <select class="form-control" name="id_estudiante3">
+
+                            <option value="">Seleccione</option>
+                            @foreach($estudiantes as $estudiante)
+                                <option value="{{$estudiante->id}}"> {{$estudiante->name}} </option>
+                            @endforeach
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_estudiante4">Nombre Estudiante 4</label>
+                        <select class="form-control" name="id_estudiante4">
+
+                            <option value="">Seleccione</option>
+                            @foreach($estudiantes as $estudiante)
+                                <option value="{{$estudiante->id}}"> {{$estudiante->name}} </option>
+                            @endforeach
+
+                        </select>
+                    </div>
 
 
-        });
-    </script> -->
+                    <div class="form-group">
+                        <label for="id_profesor1">Nombre Profesor 1 (Campo obligatorio)</label>
+                        <select class="form-control" name="id_profesor1" required>
 
-    <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{ route('bitacora.store') }}">
+                            <option>Seleccione</option>
+                            @foreach($profesores as $profesor)
+                                <option value="{{$profesor->id}}"> {{$profesor->name}} </option>
+                            @endforeach
 
+                        </select>
+                    </div>
 
-        @csrf
-        <h2>Crear Bitacora</h2>
+                    <div class="form-group">
+                        <label for="id_profesor1">Nombre Profesor 2</label>
+                        <select class="form-control" name="id_profesor2">
 
+                            <option>Seleccione</option>
+                            @foreach($profesores as $profesor)
+                                <option value="{{$profesor->id}}"> {{$profesor->name}} </option>
+                            @endforeach
 
+                        </select>
+                    </div>
+                    <hr>
 
-        <div>
-            <label for="titulo">Nombre Bitacora (Campo obligatorio) </label>
-            <input class="form-control shadow-sm" name="titulo" type="text" required>
+                    <div class="py-3">
+                        <button type="submit" class="btn btn-primary btn-lg btn-block rounded-pill"> Crear</button>
+                        <a class="btn btn-lg btn-block btn-outline-dark rounded-pill" href="{{route('home')}}">
+                            Cancelar
+                        </a>
+                    </div>
+
+                </form>
+
+            </div>
         </div>
-
-        <br>
-        <div>
-            <label for="est1">Nombre Estudiante 1 (Campo obligatorio)</label>
-            <select class="form-control" name="est1" id="" required>
-                <option value="">Seleccione</option>
-
-                @foreach($usuarios as $usuario)
-
-                <option value="{{$usuario->id}}"> {{$usuario->name}} </option>
-
-                @endforeach
-
-            </select>
-
-
-
-            <br>
-
-
-            <label for="est2">Nombre Estudiante 2</label>
-            <select class="form-control " name="est2" id="">
-                <option value="0">Seleccione</option>
-
-                @foreach($usuarios as $usuario)
-
-                <option value="{{$usuario->id}}"> {{$usuario->name}} </option>
-
-                @endforeach
-
-            </select>
-
-
-
-            <br>
-
-
-            <label for="est3">Nombre Estudiante 3</label>
-            <select class="form-control " name="est3" id="">
-                <option value="0">Seleccione</option>
-
-                @foreach($usuarios as $usuario)
-
-                <option value="{{$usuario->id}}"> {{$usuario->name}} </option>
-
-                @endforeach
-
-            </select>
-
-
-
-            <br>
-
-
-            <label for="est4">Nombre Estudiante 4</label>
-            <select class="form-control " name="est4" id="">
-                <option value="0">Seleccione</option>
-
-                @foreach($usuarios as $usuario)
-
-                <option value="{{$usuario->id}}"> {{$usuario->name}} </option>
-
-                @endforeach
-
-            </select>
-
-        </div>
-
-
-
-        <div>
-            <br>
-
-            <label for="id_profesor1">Nombre Profesor 1 (Campo obligatorio)</label>
-            <select class="form-control" name="id_profesor1" id="" required>
-                <option value="0">Seleccione</option>
-
-                @foreach($profesores as $profesor)
-
-                <option value="{{$profesor->id}}"> {{$profesor->name}} </option>
-
-                @endforeach
-
-            </select>
-
-
-            <br>
-
-            <label for="id_profesor2">Nombre Profesor 2</label>
-            <select class="form-control" name="id_profesor2" id="">
-                <option value="0">Seleccione</option>
-
-                @foreach($profesores as $profesor)
-
-                <option value="{{$profesor->id}}"> {{$profesor->name}} </option>
-
-                @endforeach
-
-            </select>
-        </div>
-
-
-
-
-
-        <br>
-
-
-
-        <button type="submit" class="btn btn-primary btn-lg btn-block" style="border-radius: 40px;width:200px;margin:0 auto">CREAR</button>
-        <a class="btn btn-link btn-block" href="{{route('home')}}">Cancelar</a>
-
-
-
-    </form>
-
-</div>
-
-
+    </div>
 
 @endsection

@@ -13,7 +13,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-            <ul class="nav nav-pills">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link text-light" href="{{ route('home') }}"> Home </a>
                 </li>

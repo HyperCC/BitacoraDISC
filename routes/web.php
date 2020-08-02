@@ -65,7 +65,6 @@ Route::patch('bitacoras-update/{bitacora}', 'BitacoraController@update')->name('
 Route::patch('bitacoras-remover/{bitacora}', 'BitacoraController@remover')->name('bitacoras-remover');
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('bitacora', 'BitacoraController');
 
 // Ruta para la creacion de un AVANCE.
 Route::get('avance-create/', 'AvanceController@create')->name('avances-create');
