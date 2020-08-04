@@ -6,7 +6,7 @@
 
     <div class="container">
 
-        <h1 class="display-2 my-3 text-center"> Todos los Usuarios registrados</h1>
+        <h1 class="display-2 my-3 text-center"> Todos los Usuarios Removidos</h1>
 
         <hr>
 

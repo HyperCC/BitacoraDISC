@@ -35,9 +35,29 @@ class AvanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        // ARREGLAR ESTO DESPUÉS
+       if (request('archivo')!=null) {
+        $avance = Avance::create([
+            'user_id' => request('user_id'),
+            'nombre' => request('name'),
+            'descripcion' => request('descripcion'),
+            'bitacora_id' =>request('bita_id'),
+            'ubi_archivo'=>request('archivo')->store('public'),
+        ]);
+       }else {
+        $avance = Avance::create([
+            'user_id' => request('user_id'),
+            'nombre' => request('name'),
+            'descripcion' => request('descripcion'),
+            'bitacora_id' =>request('bita_id'),
+            'ubi_archivo'=>request('archivo'),
+        ]);
+           
+       }
+        
+        return view('home');
     }
 
     /**

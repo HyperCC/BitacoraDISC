@@ -44,4 +44,18 @@ class User extends Authenticatable
         return $this->belongsToMany(Bitacora::class)->withTimestamps();
     }
 
+    // un usuario tiene muchos avances
+
+    public function avances()
+    {
+        return $this->hasMany(Avance::class)->withTimestamps();
+    }
+
+     // una usuario pertenece a muchos evidencias
+     public function evidencias()
+     {
+         return $this->belongsToMany(User::class)->withTimestamps();
+     }
+
+
 }

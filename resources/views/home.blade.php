@@ -16,14 +16,14 @@
 
                     <div class="card my-4 box-shadow">
                         <div class="card-header bg-dark py-4">
-                            <h3 class="my-0 font-weight-normal text-light"> Bienvenido Administrador </h3>
+                            <h3 class="my-0 font-weight-normal text-light"> Bienvenido {{auth()->user()->rol}} </h3>
                         </div>
                         <div class="card-body">
                             <h4 class="card-title pircing-card-title py-4"> ¡Bienvenid@ <span
                                     class="text-primary">{{ auth()->user()->email }}</span> al menú para
-                                Administradores!
+                                    {{auth()->user()->rol}}
                                 <br>
-                                Desde aquí puedes realiza todas tus operacciones de a cuerdo a tu rol.
+                                Desde aquí puedes realiza todas tus operacciones de acuerdo a tu rol.
                             </h4>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
 
                 <div class="card mb-3 box-shadow">
                     <div class="card-header bg-primary">
-                        <h5 class="my-0 font-weight-normal text-light"> Administrador </h5>
+                        <h5 class="my-0 font-weight-normal text-light"> {{auth()->user()->rol}} </h5>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title pircing-card-title"> Crear un Usuario</h3>
@@ -54,7 +54,7 @@
 
                 <div class="card mb-3 box-shadow">
                     <div class="card-header bg-success">
-                        <h5 class="my-0 font-weight-normal text-light">Administrador</h5>
+                        <h5 class="my-0 font-weight-normal text-light">{{auth()->user()->rol}}</h5>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title pircing-card-title">Ver Usuarios Activos</h3>
@@ -66,7 +66,7 @@
 
                 <div class="card mb-3 box-shadow">
                     <div class="card-header bg-danger">
-                        <h5 class="my-0 font-weight-normal text-light">Administrador</h5>
+                        <h5 class="my-0 font-weight-normal text-light">{{auth()->user()->rol}}</h5>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title pircing-card-title">Ver Usuarios Removidos</h3>
@@ -81,13 +81,13 @@
 
     <!-- TOPERACIONES DISPONIBLES PARA LA SECRETARIA -->
 
-        @if(\Illuminate\Support\Facades\Auth::user()->rol == ('Encargado Titulación' or 'Secreataria') )
+        @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Admin' or \Illuminate\Support\Facades\Auth::user()->rol == 'Encargado Titulación' or \Illuminate\Support\Facades\Auth::user()->rol == 'Secretaria' )
 
             <div class="card-deck my-3 text-center">
 
                 <div class="card mb-4 box-shadow">
                     <div class="card-header bg-primary">
-                        <h5 class="my-0 font-weight-normal text-light"> Secretaria </h5>
+                        <h5 class="my-0 font-weight-normal text-light"> {{auth()->user()->rol}} </h5>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title pircing-card-title"> Crear una Bitacora</h3>
@@ -99,7 +99,7 @@
 
                 <div class="card mb-4 box-shadow">
                     <div class="card-header bg-success">
-                        <h5 class="my-0 font-weight-normal text-light"> Secretaria</h5>
+                        <h5 class="my-0 font-weight-normal text-light"> {{auth()->user()->rol}}</h5>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title pircing-card-title">Ver Bitacoras</h3>
@@ -123,12 +123,12 @@
             </div>
         @endif
 
-        @if(\Illuminate\Support\Facades\Auth::user()->rol == ('Estudiante' or 'Admin') )
+        @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante' or \Illuminate\Support\Facades\Auth::user()->rol == 'Admin' )
             <div class="card-deck my-3 text-center">
 
                 <div class="card mb-4 box-shadow">
                     <div class="card-header bg-primary">
-                        <h5 class="my-0 font-weight-normal text-light"> Estudiante </h5>
+                        <h5 class="my-0 font-weight-normal text-light"> {{auth()->user()->rol}} </h5>
                     </div>
                     <div class="card-body">
                         <h3 class="card-title pircing-card-title"> Ingresar avance</h3>
@@ -137,17 +137,17 @@
                     <a href="{{ route('avances-create') }}" class="btn m-3 btn-outline-primary rounded-pill">¡A
                         Crear!</a>
                 </div>
+        
 
                 <div class="card mb-4 box-shadow">
-                    <div class="card-header bg-primary">
-                        <h5 class="my-0 font-weight-normal text-light"> Estudiante </h5>
+                    <div class="card-header">
+                        <h5 class="my-0 font-weight-normal text-light"> - </h5>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title pircing-card-title"> Adjuntar evidencia</h3>
-                        <p class="text-muted"> Se puede adjuntar evidencia a un avance semanal</p>
+                        <h3 class="card-title pircing-card-title"></h3>
+                        <p class="text-muted"></p>
                     </div>
-                    <a href="{{ route('bitacoras-index') }}" class="btn m-3 btn-outline-primary rounded-pill">¡A
-                        Crear!</a>
+                    <button disabled class="btn m-3 btn-outline-danger rounded-pill"> -</button>
                 </div>
 
                 <div class="card mb-4 box-shadow">

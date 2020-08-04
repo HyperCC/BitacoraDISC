@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bitacora extends Model
 {
-
+    
     protected $guarded = [];
 
     protected $primaryKey = "id";
