@@ -64,25 +64,29 @@
                                 <p class="form-control" aria-describedby="basic-addon3"> {{ $user->estado }} </p>
                             </div>
 
-                            <div class="py-3">
-                                <a class="btn btn-lg btn-outline-warning btn-block rounded-pill mb-2 text-dark"
-                                   href="{{ route('users-edit', $user) }}"> Editar </a>
+                            @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Admin')
+                                <div class="py-3">
+                                    <a class="btn btn-lg btn-outline-warning btn-block rounded-pill mb-2 text-dark"
+                                       href="{{ route('users-edit', $user) }}"> Editar </a>
 
-                                <form method="POST" action="{{ route('users-remover', $user) }}">
-                                    @csrf
-                                    @method('PATCH')
-                                    <input type="hidden" name="estado" value="Removido">
-                                    <a class="btn btn-lg btn-outline-danger btn-block rounded-pill" data-toggle="modal"
-                                       data-target="#eliminarUsuario"
-                                       type="submit">
-                                        Eliminar
-                                    </a>
+                                    <form method="POST" action="{{ route('users-remover', $user) }}">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="estado" value="Removido">
 
-                                    <!-- Modal | Mensaje de alerta para confirmacion de eliminacion de un usuario -->
-                                    @include('helpers.modalEliminarUsuario')
+                                        <a class="btn btn-lg btn-outline-danger btn-block rounded-pill"
+                                           data-toggle="modal"
+                                           data-target="#eliminarUsuario"
+                                           type="submit">
+                                            Eliminar
+                                        </a>
 
-                                </form>
-                            </div>
+                                        <!-- Modal | Mensaje de alerta para confirmacion de eliminacion de un usuario -->
+                                        @include('helpers.modalEliminarUsuario')
+
+                                    </form>
+                                </div>
+                            @endif
 
                         </div>
                     </div>

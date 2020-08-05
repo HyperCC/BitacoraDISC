@@ -10,8 +10,7 @@
                 </button>
             </div>
             <div class="modal-body mx-3">
-                ¿Esta seguro de que desea finalizar el estado de esta Bitacora? Podrá verla en el futuro para
-                reactivarla de ser necesario.
+                ¿Esta seguro de que desea finalizar el estado de esta Bitacora? Podrá verla en el futuro para reactivarla de ser necesario.
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-lg" data-dismiss="modal">Cancelar</button>

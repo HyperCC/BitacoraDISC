@@ -16,7 +16,9 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">E-mail</th>
                 <th scope="col">Rol</th>
-                <th scope="col"> Ver</th>
+                @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Admin')
+                    <th scope="col"> Ver</th>
+                @endif
             </tr>
             </thead>
 
@@ -27,7 +29,9 @@
                         <td> {{ $us->name }}</td>
                         <td> {{ $us->email }}</td>
                         <td> {{ $us->rol }}</td>
-                        <td><a href="{{route('users-show', $us)}}" class="btn btn-success px-3"> Ver</a></td>
+                        @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Admin')
+                            <td><a href="{{route('users-show', $us)}}" class="btn btn-success px-3"> Ver</a></td>
+                        @endif
                     </tr>
 
                 @endif

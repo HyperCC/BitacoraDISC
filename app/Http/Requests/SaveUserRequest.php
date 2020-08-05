@@ -24,9 +24,23 @@ class SaveUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'email'=>'required',
-            'password'=>'required',
+            'name'=>'nullable',
+            'rut'=>'nullable|min:8',
+            'carrera'=>'nullable|min:4',
+            'email'=>'required|unique:users',
+            'password'=>'required|min:8',
             'rol'=>'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.required'=>'Debe ingresar un E-mail',
+            'email.unique'=>'Este E-mail ya fue ingresado, intente con otro',
+            'password.required'=>'Debe ingresar una contraseña',
+            'password.min'=>'La contraseña debe ser de al menos 8 caracteres',
+            'rol.required'=>'Debe elegir un rol'
         ];
     }
 }

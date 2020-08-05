@@ -4,17 +4,21 @@
 
 @section('content_body')
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <script>
         function habilitaDeshabilita(form) {
             form.estado.checked == false;
             if (form.estado.checked == true) {
                 form.causaRenuncia[0].disabled = false;
                 form.causaRenuncia[1].disabled = false;
+                form.btnRenuncia.disabled = false;
             }
 
             if (form.estado.checked == false) {
                 form.causaRenuncia[0].disabled = true;
                 form.causaRenuncia[1].disabled = true;
+                form.btnRenuncia.disabled = true;
             }
         }
     </script>
@@ -28,18 +32,16 @@
 
             for (i = 0; i < opciones.length; i++) {
                 if (opciones[i].checked == true) {
-                    pulsado = true
-                    elegido = i
+                    pulsado = true;
+                    elegido = i;
+                    break;
                 }
             }
 
-            if (pulsado == false) {
-                alert("no has elegido ninguna opción. \n Elige una opción para que el formulario pueda ser enviado")
-                return false
-
+            if (pulsado) {
+                return true;
             } else {
-                return true
-
+                return false;
             }
         }
     </script>
@@ -80,73 +82,83 @@
                             </div>
                         </div>
 
+                    @if(\Illuminate\Support\Facades\Auth::user()->rol != 'Estudiante')
                         <!-- EN CASO DE TENER LA BITACORA FINALIZADA -->
-                        <div>
-                            @if($bitacora->estado == 'Finalizada')
-                                <div class="card px-3">
+                            <div>
+                                @if($bitacora->estado == 'Finalizada')
+                                    <div class="card px-3">
 
-                                    <div class="input-group my-3">
-                                        <div class="input-group-prepend">
-                                            <p class="input-group-text"> Causa Renuncia</p>
+                                        <div class="input-group my-3">
+                                            <div class="input-group-prepend">
+                                                <p class="input-group-text"> Causa Renuncia</p>
+                                            </div>
+                                            <p class="form-control"
+                                               aria-describedby="basic-addon3"> {{ $bitacora->causa_renuncia }} </p>
                                         </div>
-                                        <p class="form-control"
-                                           aria-describedby="basic-addon3"> {{ $bitacora->causa_renuncia }} </p>
                                     </div>
-                                </div>
 
-                            @else
+                                @else
 
-                                <div class="mt-3">
-                                    <!-- FORMULARIOS PARA INICIAR FINALIZACION DE BITACORA -->
-                                    <form action="{{ route('bitacoras-remover', $bitacora) }}" method="POST"
-                                          class="form-group" name="formEnding" onsubmit="comprobar()">
+                                    <div class="mt-3">
+                                        <!-- FORMULARIOS PARA INICIAR FINALIZACION DE BITACORA -->
+                                        <form action="{{ route('bitacoras-remover', $bitacora) }}" method="POST"
+                                              class="form-group" name="formEnding" onsubmit="comprobar()">
 
-                                        @method('PATCH')
-                                        <div class="form-group">
-                                            <label class="form-check-label ml-1">¿Desea finalizar esta Bitacora?</label>
-                                            <br>
-                                            <span class="ml-4">
+                                            @csrf
+                                            @method('PATCH')
+
+                                            <div class="form-group">
+                                                <label class="form-check-label ml-1">¿Desea finalizar esta
+                                                    Bitacora?</label>
+                                                <br>
+                                                <span class="ml-4">
                                         <input class="form-check-input" type="checkbox" value="Finalizada" name="estado"
                                                onClick="habilitaDeshabilita(this.form)"> Si </span>
-                                        </div>
+                                            </div>
 
-                                        <span class="ml-1">Por la siguiente razon:</span>
-                                        <div class="form-group ml-4">
-                                            <input disabled checked class="form-check-input" type="radio"
-                                                   name="causaRenuncia" value="No continuidad del trabajo">
-                                            <label class="form-check-label">No continuidad del trabajo</label> <br>
+                                            <span class="ml-1">Por la siguiente razon:</span>
 
-                                            <input disabled class="form-check-input" type="radio" name="causaRenuncia"
-                                                   value="Aprobación del término de trabajo">
-                                            <label class="form-check-label">Aprobación del término de trabajo</label>
-                                        </div>
+                                            <div class="form-group ml-4">
 
-                                        <!-- BOTON DE ENVIO DE FINALIZACION BITACORA -->
-                                        <div>
-                                            <a class="btn btn-lg btn-outline-danger btn-block rounded-pill"
-                                               data-toggle="modal" data-target="#finalizarBitacora" type="submit">
-                                                Finalizar
-                                            </a>
-                                        </div>
+                                                <input disabled checked class="form-check-input" type="radio"
+                                                       name="causaRenuncia" value="No continuidad del trabajo">
+                                                <label class="form-check-label">No continuidad del trabajo</label> <br>
 
-                                        <!-- Modal | Mensaje de alerta para confirmacion de eliminacion de un usuario -->
+                                                <input disabled class="form-check-input" type="radio"
+                                                       name="causaRenuncia"
+                                                       value="Aprobación del término de trabajo">
+                                                <label class="form-check-label">Aprobación del término de
+                                                    trabajo</label>
+
+                                            </div>
 
 
-                                    </form>
-                                </div>
-                            @endif
-                        </div>
+                                            <!-- BOTON DE ENVIO DE FINALIZACION BITACORA -->
+                                            <div>
+                                                <button class="btn btn-lg btn-outline-danger btn-block rounded-pill"
+                                                        id="btnRenuncia" disabled="disabled"
+                                                        data-toggle="modal" data-target="#finalizarBitacora"
+                                                        type="submit">
+                                                    Finalizar
+                                                </button>
+                                            </div>
 
-                        <!-- BOTON PARA EDITAR LA BITACORA SELECCIONADA -->
-                        <div>
-                            <a class="btn btn-lg btn-outline-warning btn-block rounded-pill mb-2 text-dark"
-                               href="{{ route('bitacoras-edit', $bitacora) }}"> Editar </a>
+                                            <!-- Modal | Mensaje de alerta para confirmacion de eliminacion de un usuario -->
 
-                            <form method="POST" action="#">
-                                @csrf
+                                        </form>
 
-                            </form>
-                        </div>
+                                    </div>
+                                @endif
+                            </div>
+
+                            <!-- BOTON PARA EDITAR LA BITACORA SELECCIONADA -->
+                            <div>
+                                <a class="btn btn-lg btn-outline-warning btn-block rounded-pill mb-2 text-dark"
+                                   href="{{ route('bitacoras-edit', $bitacora) }}">
+                                    Editar
+                                </a>
+                            </div>
+                        @endif
 
                     </div>
                 </div>
@@ -217,8 +229,41 @@
             </table>
             <br>
 
-            <!--TABLAS PARA EVIDENCIAS -->
-            <h2 class="mx-auto mt-lg-3"> Evidencias: </h2>
+            <!-- TABLAS DE PROFESORES -->
+            <h2 class="mx-auto mt-lg-3"> Registros de Avances: </h2>
+            <table class="table table-hover table-responsive-sm">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Estudiante</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col"> Fecha</th>
+                    <th scope="col"> Ver</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @forelse($bitacora->avances as $ava)
+                    <tr>
+                        <td>{{ $ava->user->name }}</td>
+                        <td>{{ $ava->descripcion }}</td>
+                        <td> {{ $ava->created_at }} </td>
+
+                        @if($ava->evidencia)
+                            <td><a href="{{ route('avances-donwload', $ava->evidencia) }}" class="btn btn-success px-3"> Evidencia</a></td>
+                        @else
+                            <td><a href="#" class="btn btn-success px-3 disabled">Sin Evidencia</a></td>
+                        @endif
+                    </tr>
+
+                @empty
+                    <tr>
+                        <th> No hay ninguna evidencia registrada para esta Bitacora</th>
+                    </tr>
+                @endforelse
+                </tbody>
+
+            </table>
+            <br>
 
         </div>
     </div>

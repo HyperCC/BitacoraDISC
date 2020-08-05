@@ -6,7 +6,11 @@
 
     <div class="container text-center">
 
-        <p class="display-4 my-4"> Todos las Bitacoras registradas</p>
+        @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Admin')
+            <p class="display-4 my-4"> Todas las Bitacoras registradas </p>
+        @else
+            <p class="display-4 my-4"> Bitacoras registradas para {{\Illuminate\Support\Facades\Auth::user()->name}}</p>
+        @endif
 
         <br>
         <hr>
@@ -27,7 +31,7 @@
                 <tr>
                     <td> {{ $bitacora->titulo }}</td>
                     <td> {{ $bitacora->estado }}</td>
-                    <td> nope </td>
+                    <td> nope</td>
                     <td><a href="{{route('bitacoras-show', $bitacora)}}" class="btn btn-success px-3"> Ver</a></td>
                 </tr>
 
@@ -38,7 +42,6 @@
 
         </table>
         <hr>
-
 
         <hr>
 

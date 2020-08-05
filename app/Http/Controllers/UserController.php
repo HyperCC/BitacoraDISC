@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\SaveUserRequest;
+use App\Http\Requests\SaveUserRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -18,14 +18,14 @@ class UserController extends Controller
     public function index()
     {
         return view('usersOperations.index', [
-            'user' => User::paginate()
+            'user' => User::all()
         ]);
     }
 
     public function deleteds()
     {
         return view('usersOperations.deleteds', [
-            'user' => User::paginate()
+            'user' => User::all()
         ]);
     }
 
@@ -47,35 +47,27 @@ class UserController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(SaveUserRequest $request)
     {
-        $scndRol = 'ninguno';
+        //TODO: en caso de tener doble rol.
+        $us = User::create([
+            'name'=>(\request('name')==null)? 'usuario':request('name'),
+            'rut'=>(\request('rut')==null)? 'no aplica':request('rut'),
+            'carrera'=>\request('carrera'),
+            'email'=>request('email'),
+            'password'=>\request('password'),
+            'rol'=>\request('rol'),
+        ], $request->validated());
+
+        $us->fill([
+            'password' => Hash::make($us->password)
+        ])->save();
 
         //en caso de que el rol sea encargado de titulacion, el rol secundario sera Profesor.
         if (!strcmp('Encargado Titulación', request('rol'))) {
-            $scndRol = 'Profesor';
+            $us->fill(['rol_secundario' => 'Profesor']);
+            $us->save();
         }
-
-        $newName = 'user';
-        if (strcmp(\request('name'), "")) {
-            $newName = \request('name');
-        }
-
-        $newRut = 'ninguno';
-        if (strcmp(\request('rut'), "")) {
-            $newRut = \request('rut');
-        }
-
-        //TODO: en caso de tener doble rol.
-        User::create([
-            'name' => $newName,
-            'email' => \request('email'),
-            'rut' => $newRut,
-            'carrera' => \request('carrera'),
-            'password' => Hash::make(request('password')),
-            'rol' => request('rol'),
-            'rol_secundario' => $scndRol
-        ]);
 
         return redirect()->route('home');
     }
@@ -115,38 +107,41 @@ class UserController extends Controller
      */
     public function update(User $user)
     {
-        $scndRol = 'ninguno';
+        //$user->update($request->validated());
 
-        //en caso de que el rol sea encargado de titulacion, el rol secundario sera Profesor.
-        if (!strcmp('Encargado Titulación', request('rol'))) {
-            $scndRol = 'Profesor';
-        }
-
-        //en caso de no cambiar la contraseña, no se crea un nuevo hash, se mantiene el anterior.
-        $oldPassword = $user->password;
-        $newPassword = request('password');
-
-        if (strcmp($newPassword, "")) {
-            $newPassword = Hash::make(request('password'));
-        } else {
-            $newPassword = $oldPassword;
-        }
-
-        $user->update([
-            'name' => request('name'),
-            'email' => request('email'),
-            'rut' => request('rut'),
-            'carrera' => request('carrera'),
-            'rol' => request('rol'),
-            'rol_secundario' => $scndRol,
-            'password' => $newPassword
+        $theData = \request()->validate([
+            'name' => '',
+            'email' => 'required|unique:users,email,' . $user->id,
+            'rut' => '',
+            'carrera'=>'',
+            'password' => '',
+            'rol' => 'required',
         ]);
+
+        if ($theData['password']) {
+            $theData['password'] = Hash::make($theData['password']);
+        } else {
+            unset($theData['password']);
+        }
+
+        $user->update($theData);
+
+        if (!strcmp('Encargado Titulación', request('rol'))) {
+            $user->update([
+                'rol_secundario' => 'Profesor'
+            ]);
+        } else {
+            $user->update([
+                'rol_secundario' => 'ninguno'
+            ]);
+        }
 
         return redirect()->route('users-show', $user);
     }
 
     public function remover(User $user)
     {
+
         $user->update([
             'estado' => request('estado')
         ]);

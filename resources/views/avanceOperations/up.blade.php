@@ -14,14 +14,13 @@
 
                 @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante' and \Illuminate\Support\Facades\Auth::user()->disponibilidad == 'No')
 
-                    <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{route('avances-store')}}"
+                    <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{ route('avances-up') }}"
                           enctype="multipart/form-data">
 
                         @csrf
 
                         <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                         <tbody>
-
                         <!-- Arreglar forelse para poder obtener la bitacora del usuario logueado -->
                         @forelse(auth()->user()->bitacoras as $bita)
                             <tr>
@@ -32,6 +31,7 @@
                                 <th> No hay ningún Alumno asociado a esta Bitacora</th>
                             </tr>
                         @endforelse
+
                         </tbody>
 
                         <div class="text-center">
@@ -41,24 +41,39 @@
                         <hr>
 
                         <div class="form-group">
-                            <input class="form-control shadow-sm bg-light" name="name" type="hidden" value="{{auth()->user()->name}}">
+                            <label for="name"> Nombre Evidencia </label>
+                            <input class="form-control shadow-sm bg-light" name="name" type="text">
                         </div>
 
-                        <div class="form-group">
-                            <label for="descripcion"> Descripción avance </label>
-                            <input class="form-control shadow-sm bg-light" name="descripcion" type="text">
-                        </div>
+
+                        @foreach(auth()->user()->bitacoras as $bita)
+                            <div class="form-group">
+                                <label for="avance"> Avances sin Evidencias </label>
+
+                                <select class="form-control shadow-sm custom-select" name="avance">
+                                    @foreach($bita->avances as $avance)
+                                        <option value="{{$avance->id}}">
+                                            {{$avance->nombre}} ({{$avance->created_at}})
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                            </div>
+                        @endforeach
 
                         <div class="form-group">
-                            <label for="archivo"> Archivo </label>
+                            <label for="archivo"> Adjuntar evidencia </label>
                             <br>
-                            <input accept="image/jpg, image/jpeg, application/pdf, .docx" class="" name="archivo" type="file">
+                            <input accept="image/jpg, image/jpeg, application/pdf, .docx" class="" name="archivo"
+                                   type="file" required>
                         </div>
 
                         <hr>
 
                         <div class="py-3">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block rounded-pill"> Crear</button>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block rounded-pill"> Adjuntar
+                                Evidencia
+                            </button>
                             <a class="btn btn-lg btn-block btn-outline-dark rounded-pill" href="{{route('home')}}">
                                 Cancelar
                             </a>
@@ -69,6 +84,7 @@
                 @if(\Illuminate\Support\Facades\Auth::user()->disponibilidad == 'Si')
                     <h1>No tienes bitácoras inscritas.</h1>
                 @endif
+
             </div>
         </div>
     </div>

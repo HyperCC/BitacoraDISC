@@ -18,18 +18,21 @@
                     <a class="nav-link text-light" href="{{ route('home') }}"> Home </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="{{ route('users-index') }}"> Nosotros </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-light" href="{{ route('users-index') }}"> Mas Información </a>
-                </li>
-
                 @auth()
+
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="{{ route('users-index') }}"> Usuarios </a>
+                        <a class="nav-link text-light" href="{{ route('bitacoras-index') }}"> Bitacoras </a>
                     </li>
+
+                    @if(\Illuminate\Support\Facades\Auth::user()->rol=='Admin')
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{{ route('users-index') }}"> Usuarios </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="{{ route('users-deleteds') }}"> Usurios Removidos </a>
+                        </li>
+                    @endif
 
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button"

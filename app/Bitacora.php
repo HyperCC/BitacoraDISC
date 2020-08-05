@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bitacora extends Model
 {
-    
+
     protected $guarded = [];
 
     protected $primaryKey = "id";
@@ -20,7 +20,7 @@ class Bitacora extends Model
     // una bitacora tiene muchos avances
     public function avances()
     {
-        return $this->hasMany(Avance::class)->withTimestamps();
+        return $this->hasMany(Avance::class);
     }
 
 }

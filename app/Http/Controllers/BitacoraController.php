@@ -7,6 +7,7 @@ use App\BitacoraUser;
 use App\User;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use function Sodium\compare;
@@ -20,10 +21,7 @@ class BitacoraController extends Controller
      */
     public function index()
     {
-        return view('bitacorasOperations.index', [
-            'bitacoras' => Bitacora::paginate()
-        ]);
-
+        return (Auth::user()->rol == 'Admin' or Auth::user()->rol == 'Encargado Titulación') ? view('bitacorasOperations.index', ['bitacoras' => Bitacora::all()]) : view('bitacorasOperations.index', ['bitacoras' => Auth::user()->bitacoras]);
     }
 
     /**
@@ -33,8 +31,8 @@ class BitacoraController extends Controller
      */
     public function create()
     {
-        $estudiantes = User::where([['rol', '=', 'Estudiante'],['Disponibilidad', '=', 'Si']])->get();
-        $profesores= User::where([['rol', '=', 'Encargado Titulación']])->orWhere([['rol', '=', 'Profesor']])->get();
+        $estudiantes = User::where([['rol', '=', 'Estudiante'], ['Disponibilidad', '=', 'Si']])->get();
+        $profesores = User::where([['rol', '=', 'Encargado Titulación']])->orWhere([['rol', '=', 'Profesor']])->get();
 
         return view('bitacorasOperations.create')->with('estudiantes', $estudiantes)->with('profesores', $profesores);
     }
@@ -76,7 +74,10 @@ class BitacoraController extends Controller
         }
 
         // id de usuario validado por la seleccion en vista.
-        $user = User::findOrFail($id);
+        $user = User::find($id);
+        if ($user == null) {
+            return;
+        }
 
         // actualizacion
         $user->disponibilidad = 'No';
@@ -122,7 +123,7 @@ class BitacoraController extends Controller
     {
         $bitacora->update([
             'titulo' => request('titulo'),
-            'estado'=> \request('estado'),
+            'estado' => \request('estado'),
             'causa_renuncia' => 'ninguna'
         ]);
 
@@ -140,15 +141,14 @@ class BitacoraController extends Controller
         //Todo
         $nuevoEstado = "Activa";
         $nuevaRazon = "ninguna";
-        if(\request('estado')=='Finalizada')
-        {
+        if (\request('estado') == 'Finalizada') {
             $nuevoEstado = \request('estado');
             $nuevaRazon = \request('causaRenuncia');
         }
 
         $bitacora->update([
             'estado' => $nuevoEstado,
-            'causa_renuncia'=>$nuevaRazon
+            'causa_renuncia' => $nuevaRazon
         ]);
 
         return redirect()->route('bitacoras-index', $bitacora);

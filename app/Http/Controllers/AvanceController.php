@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Avance;
+use App\Evidencia;
+use Illuminate\Support\Facades\Auth;
+use Response;
 use Illuminate\Http\Request;
 
 class AvanceController extends Controller
@@ -32,38 +35,65 @@ class AvanceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store()
     {
-        // ARREGLAR ESTO DESPUÉS
-       if (request('archivo')!=null) {
+        $avance = null;
+
         $avance = Avance::create([
             'user_id' => request('user_id'),
             'nombre' => request('name'),
             'descripcion' => request('descripcion'),
-            'bitacora_id' =>request('bita_id'),
-            'ubi_archivo'=>request('archivo')->store('public'),
+            'bitacora_id' => request('bita_id')
         ]);
-       }else {
-        $avance = Avance::create([
-            'user_id' => request('user_id'),
-            'nombre' => request('name'),
-            'descripcion' => request('descripcion'),
-            'bitacora_id' =>request('bita_id'),
-            'ubi_archivo'=>request('archivo'),
-        ]);
-           
-       }
-        
+
+        if (request('archivo') !== null) {
+            Evidencia::create([
+                'name_evid' => 'indefinido',
+                'ubi_archivo' => request('archivo')->store('public'),
+                'name_alumno' => request('name'),
+                'avance_id' => $avance->id
+            ]);
+        }
+
+
         return view('home');
     }
+
+    public function getDownload(Evidencia $evidencia)
+    {
+        //PDF file is stored under project/public/download/info.pdf
+        $file = $evidencia->ubi_archivo;
+
+        $headers = array(
+            'Content-Type: .*',
+        );
+
+        return Response::download($file, 'evidencia', $headers);
+    }
+
+    public function createUp()
+    {
+        return view('avanceOperations.up');
+    }
+
+    public function up()
+    {
+        Evidencia::create([
+            'name_evid' => \request('name'),
+            'ubi_archivo' => request('archivo')->store('public'),
+            'name_alumno' => request('name'),
+            'avance_id' => \request('avance')
+        ]);
+    }
+
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -74,7 +104,7 @@ class AvanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -85,8 +115,8 @@ class AvanceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -97,7 +127,7 @@ class AvanceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

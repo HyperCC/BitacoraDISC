@@ -21,12 +21,13 @@
 
                         <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
                         <tbody>
-
                         <!-- Arreglar forelse para poder obtener la bitacora del usuario logueado -->
                         @forelse(auth()->user()->bitacoras as $bita)
+
                             <tr>
                                 <input type="hidden" name="bita_id" value="{{$bita->id}}">
                             </tr>
+
                         @empty
                             <tr>
                                 <th> No hay ningún Alumno asociado a esta Bitacora</th>
@@ -41,7 +42,8 @@
                         <hr>
 
                         <div class="form-group">
-                            <input class="form-control shadow-sm bg-light" name="name" type="hidden" value="{{auth()->user()->name}}">
+                            <label for="name"> Nombre </label>
+                            <input class="form-control shadow-sm bg-light" name="name" type="text" value="{{auth()->user()->name}}">
                         </div>
 
                         <div class="form-group">
@@ -60,8 +62,7 @@
                         <div class="py-3">
                             <button type="submit" class="btn btn-primary btn-lg btn-block rounded-pill"> Crear</button>
                             <a class="btn btn-lg btn-block btn-outline-dark rounded-pill" href="{{route('home')}}">
-                                Cancelar
-                            </a>
+                                Cancelar </a>
                         </div>
                     </form>
 

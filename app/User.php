@@ -15,9 +15,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'rut', 'carrera', 'rol', 'rol_secundario', 'estado', 'password'
-    ];
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -45,17 +43,9 @@ class User extends Authenticatable
     }
 
     // un usuario tiene muchos avances
-
     public function avances()
     {
-        return $this->hasMany(Avance::class)->withTimestamps();
+        return $this->hasMany(Avance::class);
     }
-
-     // una usuario pertenece a muchos evidencias
-     public function evidencias()
-     {
-         return $this->belongsToMany(User::class)->withTimestamps();
-     }
-
 
 }

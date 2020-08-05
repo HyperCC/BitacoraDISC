@@ -70,3 +70,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('avance-create/', 'AvanceController@create')->name('avances-create');
 //Ruta para almacenar un AVANCE.
 Route::post('avances-store/', 'AvanceController@store')->name('avances-store');
+
+Route::get('avances-create-up', 'AvanceController@createUp')->name('avances-create-up');
+// subir una evidencia para algun avance del usuario
+Route::post('avances-up/', 'AvanceController@up')->name('avances-up');
+// TODO: descargar evidencia de algun avance (POR TERMINAR AUN)
+Route::get('avances-donwload/{evidencia}', 'AvanceController@getDownload')->name('avances-donwload');

@@ -4,6 +4,7 @@
 
 @section('content_body')
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <div class="container">
 
@@ -24,17 +25,23 @@
                     <hr>
 
                     <div class="form-group">
-                        <label for="titulo"> Titulo (Campo obligatorio) </label>
+                        <label for="titulo"> Titulo </label>
                         <input class="form-control shadow-sm bg-light" name="titulo" type="text" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="id_estudiante1">Nombre Estudiante 1 (Campo obligatorio)</label>
-                        <select class="form-control" name="id_estudiante1" required>
+                    <script>
+                        $(document).on('change', '.selectalumnos', function() {
+                            $(this).closest('.form-group').siblings().find('.selectalumnos option[value="' + $(this).val() + '"]').remove();
+                        });
+                    </script>
 
-                            <option>Seleccione</option>
+                    <div class="form-group">
+                        <label for="id_estudiante1">Nombre Estudiante 1</label>
+                        <select class="form-control selectalumnos" name="id_estudiante1">
+
+                            <option> Seleccione </option>
                             @foreach($estudiantes as $estudiante)
-                                <option value="{{$estudiante->id}}"> {{$estudiante->name}} </option>
+                                <option value="{{$estudiante->id}}"> {{$estudiante->email}} ({{$estudiante->name}})  </option>
                             @endforeach
 
                         </select>
@@ -42,11 +49,11 @@
 
                     <div class="form-group">
                         <label for="id_estudiante2">Nombre Estudiante 2</label>
-                        <select class="form-control" name="id_estudiante2">
+                        <select class="form-control selectalumnos" name="id_estudiante2">
 
-                            <option value="">Seleccione</option>
+                            <option>Seleccione</option>
                             @foreach($estudiantes as $estudiante)
-                                <option value="{{$estudiante->id}}"> {{$estudiante->name}} </option>
+                                <option value="{{$estudiante->id}}"> {{$estudiante->email}} ({{$estudiante->name}}) </option>
                             @endforeach
 
                         </select>
@@ -54,11 +61,11 @@
 
                     <div class="form-group">
                         <label for="id_estudiante3">Nombre Estudiante 3</label>
-                        <select class="form-control" name="id_estudiante3">
+                        <select class="form-control selectalumnos" name="id_estudiante3">
 
-                            <option value="">Seleccione</option>
+                            <option>Seleccione</option>
                             @foreach($estudiantes as $estudiante)
-                                <option value="{{$estudiante->id}}"> {{$estudiante->name}} </option>
+                                <option value="{{$estudiante->id}}"> {{$estudiante->email}} ({{$estudiante->name}}) </option>
                             @endforeach
 
                         </select>
@@ -66,24 +73,29 @@
 
                     <div class="form-group">
                         <label for="id_estudiante4">Nombre Estudiante 4</label>
-                        <select class="form-control" name="id_estudiante4">
+                        <select class="form-control selectalumnos" name="id_estudiante4">
 
-                            <option value="">Seleccione</option>
+                            <option>Seleccione</option>
                             @foreach($estudiantes as $estudiante)
-                                <option value="{{$estudiante->id}}"> {{$estudiante->name}} </option>
+                                <option value="{{$estudiante->id}}"> {{$estudiante->email}} ({{$estudiante->name}}) </option>
                             @endforeach
 
                         </select>
                     </div>
 
+                    <script>
+                        $(document).on('change', '.selectprofesores', function() {
+                            $(this).closest('.form-group').siblings().find('.selectprofesores option[value="' + $(this).val() + '"]').remove();
+                        });
+                    </script>
 
                     <div class="form-group">
-                        <label for="id_profesor1">Nombre Profesor 1 (Campo obligatorio)</label>
-                        <select class="form-control" name="id_profesor1" required>
+                        <label for="id_profesor1">Nombre Profesor 1</label>
+                        <select class="form-control selectprofesores" name="id_profesor1">
 
                             <option>Seleccione</option>
                             @foreach($profesores as $profesor)
-                                <option value="{{$profesor->id}}"> {{$profesor->name}} </option>
+                                <option value="{{$profesor->id}}"> {{$profesor->email}} ({{$profesor->name}}) </option>
                             @endforeach
 
                         </select>
@@ -91,11 +103,11 @@
 
                     <div class="form-group">
                         <label for="id_profesor1">Nombre Profesor 2</label>
-                        <select class="form-control" name="id_profesor2">
+                        <select class="form-control selectprofesores" name="id_profesor2">
 
                             <option>Seleccione</option>
                             @foreach($profesores as $profesor)
-                                <option value="{{$profesor->id}}"> {{$profesor->name}} </option>
+                                <option value="{{$profesor->id}}"> {{$profesor->email}} ({{$profesor->name}})) </option>
                             @endforeach
 
                         </select>

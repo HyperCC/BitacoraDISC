@@ -8,26 +8,22 @@ class Avance extends Model
 {
     protected $guarded = [];
     protected $primaryKey = "id";
-    //un avance pertenece a un usuarui
 
+    //un avance pertenece a un usuario
     public function user()
     {
-        return $this->belongsTo(User::class)->withTimestamps();
+        return $this->belongsTo(User::class);
     }
 
-    // una avance pertenece a una bitacora.
+    // una evidencia pertenece a una bitacora.
     public function bitacora()
     {
-        return $this->belongsTo(Bitacora::class)->withTimestamps();
+        return $this->belongsTo(Bitacora::class);
     }
 
-     // una evidencia pertenece a muchos avances
-     public function avances()
-     {
-         return $this->belongsToMany(User::class)->withTimestamps();
-     }
-
-    
-
+    public function evidencia()
+    {
+        return $this->hasOne(Evidencia::class);
+    }
 
 }

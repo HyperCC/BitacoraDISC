@@ -28,14 +28,16 @@
                                value="{{ old('titulo', $bitacora->titulo) }}">
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-check-label m-1">¿Desea reactivar esta Bitacora?</label>
-                        <br>
-                        <span class="ml-4">
+                    @if($bitacora->estado=="Finalizada")
+                        <div class="form-group">
+                            <label class="form-check-label m-1">¿Desea reactivar esta Bitacora?</label>
+                            <br>
+                            <span class="ml-4">
                             <input class="form-check-input" type="checkbox" name="estado"
                                    value="Activa"> Si
                         </span>
-                    </div>
+                        </div>
+                    @endif
                     <hr>
 
                     <div class="py-3">

@@ -29,7 +29,7 @@
 
                     <div class="form-group">
                         <label for="email"> Correo </label>
-                        <input class="form-control shadow-sm bg-light" name="email" type="email" required>
+                        <input class="form-control shadow-sm bg-light" name="email" type="email">
                     </div>
 
                     <div class="form-group">
@@ -58,7 +58,7 @@
 
                     <div class="form-group">
                         <label for="password"> Contraseña </label>
-                        <input class="form-control shadow-sm bg-light" name="password" type="password" required>
+                        <input class="form-control shadow-sm bg-light" name="password" type="password">
                     </div>
 
                     <hr>
