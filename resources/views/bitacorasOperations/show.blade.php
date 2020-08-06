@@ -183,7 +183,11 @@
                             <td> {{ $us->name }}</td>
                             <td> {{ $us->email }}</td>
                             <td> {{ $us->rol }}</td>
-                            <td><a href="{{route('users-show', $us)}}" class="btn btn-success px-3"> Ver</a></td>
+                            @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante')
+                                <td><a href="#" class="btn btn-success px-3 disabled"> No disponible</a></td>
+                            @else
+                                <td><a href="{{route('users-show', $us)}}" class="btn btn-success px-3"> Ver</a></td>
+                            @endif
                         </tr>
                     @endif
 
@@ -216,7 +220,11 @@
                             <td> {{ $us->name }}</td>
                             <td> {{ $us->email }}</td>
                             <td> {{ $us->rol }}</td>
-                            <td><a href="{{route('users-show', $us)}}" class="btn btn-success px-3"> Ver</a></td>
+                            @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante')
+                                <td><a href="#" class="btn btn-success px-3 disabled"> No disponible</a></td>
+                            @else
+                                <td><a href="{{route('users-show', $us)}}" class="btn btn-success px-3"> Ver</a></td>
+                            @endif
                         </tr>
                     @endif
                 @empty

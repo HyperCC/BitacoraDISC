@@ -23,7 +23,7 @@ class BitacoraController extends Controller
      */
     public function index()
     {
-        return (Auth::user()->rol == 'Admin' or Auth::user()->rol == 'Encargado Titulación') ? view('bitacorasOperations.index', ['bitacoras' => Bitacora::all()]) : view('bitacorasOperations.index', ['bitacoras' => Auth::user()->bitacoras]);
+        return (Auth::user()->rol == 'Admin' or Auth::user()->rol == 'Encargado Titulación' or Auth::user()->rol == 'Secretaria') ? view('bitacorasOperations.index', ['bitacoras' => Bitacora::all()]) : view('bitacorasOperations.index', ['bitacoras' => Auth::user()->bitacoras]);
     }
 
     /**
@@ -48,7 +48,7 @@ class BitacoraController extends Controller
     public function store(SaveBitacoraRequest $request)
     {
         //validar ue se ha ingresado al menos a el estudiante 1 y el profesor 1
-        if (request('id_estudiante1') == null or request('id_profesor1') == null) {
+        if (request('id_estudiante1') == 'Seleccione' or request('id_profesor1') == 'Seleccione') {
             throw ValidationException::withMessages([
                 'Debe ingresar al menos al Estudiante 1 y el Profesor 1',
             ]);
