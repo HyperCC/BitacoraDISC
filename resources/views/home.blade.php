@@ -102,7 +102,8 @@
                     <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
                         <div class="card mb-4 box-shadow">
                             <div class="card-header bg-primary">
-                                <h5 class="my-0 font-weight-normal text-light"> {{auth()->user()->rol}}  </h5>
+                                <h5 class="my-0 font-weight-normal text-light"> Administrador/ Encargado Titulación/
+                                    Secretaria </h5>
                             </div>
                             <div class="card-body">
                                 <h3 class="card-title pircing-card-title"> Crear una Bitacora</h3>
@@ -114,28 +115,26 @@
                             </a>
                         </div>
                     </div>
+
                 @endif
 
             <!-- CUALUIER AUTENTICADO PUEDE VER LAS BITACORAS CORRESPONDIENTES-->
-                @auth()
-                    <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
-                        <div class="card mb-4 box-shadow">
-                            <div class="card-header bg-success">
-                                <h5 class="my-0 font-weight-normal text-light"> {{auth()->user()->rol}} </h5>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="card-title pircing-card-title">Ver Bitacoras</h3>
-                                <p class="text-muted"> Analizar todos los datos asignados a una Bitacora. Tambien se
-                                    pueden editar segun rol
-                                </p>
-                            </div>
-                            <a href="{{ route('bitacoras-index') }}"
-                               class="btn m-3 btn-outline-success btn-lg rounded-pill">
-                                ¡Ir a ver!
-                            </a>
+                <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                    <div class="card mb-4 box-shadow">
+                        <div class="card-header bg-success">
+                            <h5 class="my-0 font-weight-normal text-light"> Todos </h5>
                         </div>
+                        <div class="card-body">
+                            <h3 class="card-title pircing-card-title">Ver Bitacoras</h3>
+                            <p class="text-muted"> Analizar todos los datos asignados a una Bitacora. Tambien se pueden editar segun rol
+                            </p>
+                        </div>
+                        <a href="{{ route('bitacoras-index') }}"
+                           class="btn m-3 btn-outline-success btn-lg rounded-pill">
+                            ¡Ir a ver!
+                        </a>
                     </div>
-                @endauth
+                </div>
 
                 @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante' or \Illuminate\Support\Facades\Auth::user()->rol=='Admin' )
                     <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
@@ -145,7 +144,8 @@
                             </div>
                             <div class="card-body">
                                 <h3 class="card-title pircing-card-title"> Ingresar nuevo avance</h3>
-                                <p class="text-muted"> Crear registro de un avance semanal para la Bitacora corespondiente </p>
+                                <p class="text-muted"> Crear registro de un avance semanal para la Bitacora
+                                    corespondiente </p>
                             </div>
                             <a href="{{ route('avances-create') }}"
                                class="btn m-3 btn-outline-primary btn-lg rounded-pill">
@@ -161,9 +161,10 @@
                             </div>
                             <div class="card-body">
                                 <h3 class="card-title pircing-card-title"> Adjuntar evidencia</h3>
-                                <p class="text-muted"> Se puede adjuntar evidencia a un avance semanal registrado previamente</p>
+                                <p class="text-muted"> Se puede adjuntar evidencia a un avance semanal registrado
+                                    previamente</p>
                             </div>
-                            <a href="{{ route('avances-create-up') }}"
+                            <a href="{{ route('evidencia-create') }}"
                                class="btn m-3 btn-outline-primary btn-lg rounded-pill">
                                 ¡A Crear!
                             </a>

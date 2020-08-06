@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Bitacora;
 use App\BitacoraUser;
+use App\Http\Requests\SaveBitacoraRequest;
 use App\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use function Sodium\compare;
 
 class BitacoraController extends Controller
@@ -43,14 +45,21 @@ class BitacoraController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Bitacora $bitacora)
+    public function store(SaveBitacoraRequest $request)
     {
+        //validar ue se ha ingresado al menos a el estudiante 1 y el profesor 1
+        if (request('id_estudiante1') == null or request('id_profesor1') == null) {
+            throw ValidationException::withMessages([
+                'Debe ingresar al menos al Estudiante 1 y el Profesor 1',
+            ]);
+        }
+
         // creacion de la bitacora como tal.
         $bita = Bitacora::create([
             'titulo' => request('titulo'),
-            //'estado' => request('estado'),
-            'causa_renuncia' => "f"
-        ]);
+            'estado' => 'Activa',
+            'causa_renuncia' => 'ninguna'
+        ], $request->validated());
 
         $bita->Save();
 
@@ -79,8 +88,11 @@ class BitacoraController extends Controller
             return;
         }
 
-        // actualizacion
-        $user->disponibilidad = 'No';
+        // actualizacion para estudiantes
+        if ($user->rol == 'Estudiante') {
+            $user->disponibilidad = 'No';
+        }
+
         $user->save();
 
         $bitacora->users()->attach($user);

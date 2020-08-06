@@ -1,77 +1,46 @@
 @extends('helpers.template')
 
-@section('title_head', 'Crear Avance')
+@section('title_head', 'Usuarios')
 
 @section('content_body')
 
-    <div class="container">
+    <div class="container text-center">
 
-        <div class="row">
+        <p class="display-4 my-4"> Todas las evidencias para Avance {{ $avance->nombre }}</p>
 
-            <div class="col-12 col-sm-10 col-lg-6 mx-auto my-3">
+        <hr>
 
-                @extends('helpers.validate_errors')
+        <table class="table table-hover table-responsive-md">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nombre Evidencia</th>
+                <th scope="col">Estudiante</th>
+                <th scope="col"> Archivo</th>
+            </tr>
+            </thead>
 
-                @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante' and \Illuminate\Support\Facades\Auth::user()->disponibilidad == 'No')
+            <tbody>
+            @forelse($avance->evidencias as $evidencia)
+                <tr>
+                    <td> {{ $evidencia->name_evid }} </td>
+                    <td> {{ $evidencia->name_alumno }} </td>
+                    <td><a href="#" class="btn btn-success px-3"> Descargar</a></td>
+                </tr>
+            @empty
+                <tr>
+                    <th> No hay ningún Usuario activo</th>
+                </tr>
+            @endforelse
+            </tbody>
+        </table>
 
-                    <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{route('avances-store')}}"
-                          enctype="multipart/form-data">
+        <hr>
 
-                        @csrf
-
-                        <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
-                        <tbody>
-                        <!-- Arreglar forelse para poder obtener la bitacora del usuario logueado -->
-                        @forelse(auth()->user()->bitacoras as $bita)
-
-                            <tr>
-                                <input type="hidden" name="bita_id" value="{{$bita->id}}">
-                            </tr>
-
-                        @empty
-                            <tr>
-                                <th> No hay ningún Alumno asociado a esta Bitacora</th>
-                            </tr>
-                        @endforelse
-                        </tbody>
-
-                        <div class="text-center">
-                            <span class="display-3">Crear un Avance</span>
-                        </div>
-
-                        <hr>
-
-                        <div class="form-group">
-                            <label for="name"> Nombre </label>
-                            <input class="form-control shadow-sm bg-light" name="name" type="text" value="{{auth()->user()->name}}">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="descripcion"> Descripción avance </label>
-                            <input class="form-control shadow-sm bg-light" name="descripcion" type="text">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="archivo"> Archivo </label>
-                            <br>
-                            <input accept="image/jpg, image/jpeg, application/pdf, .docx" class="" name="archivo" type="file">
-                        </div>
-
-                        <hr>
-
-                        <div class="py-3">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block rounded-pill"> Crear</button>
-                            <a class="btn btn-lg btn-block btn-outline-dark rounded-pill" href="{{route('home')}}">
-                                Cancelar </a>
-                        </div>
-                    </form>
-
-                @endif
-                @if(\Illuminate\Support\Facades\Auth::user()->disponibilidad == 'Si')
-                    <h1>No tienes bitácoras inscritas.</h1>
-                @endif
-            </div>
-        </div>
     </div>
 
+
 @endsection
+
+
+
+

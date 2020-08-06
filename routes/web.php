@@ -28,32 +28,26 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
 
-Route::group([
-    'middleware' => 'admin',
-    'prefix' => 'admin',
-], function () {
-
 // mostrar todos los usuarios en DB.
-    Route::get('users-index/', 'UserController@index')->name('users-index');
+Route::get('users-index/', 'UserController@index')->name('users-index');
 // mostrar los usuarios removidos en DB.
-    Route::get('users-deleteds/', 'UserController@deleteds')->name('users-deleteds');
+Route::get('users-deleteds/', 'UserController@deleteds')->name('users-deleteds');
 
 // Ruta para la creacion de un usuario.
-    Route::get('users-create/', 'UserController@create')->name('users-create');
+Route::get('users-create/', 'UserController@create')->name('users-create');
 //Ruta para almacenar un usuario.
-    Route::post('users-store/', 'UserController@store')->name('users-store');
+Route::post('users-store/', 'UserController@store')->name('users-store');
 
 //editar un usuario.
-    Route::get('users-edit/{user}', 'UserController@edit')->name('users-edit');
+Route::get('users-edit/{user}', 'UserController@edit')->name('users-edit');
 //editar los datos de un usuario en la DB.
-    Route::patch('users-update/{user}', 'UserController@update')->name('users-update');
+Route::patch('users-update/{user}', 'UserController@update')->name('users-update');
 
 // mostrar un usuario en especifico
-    Route::get('users-show/{user}', 'UserController@show')->name('users-show');
+Route::get('users-show/{user}', 'UserController@show')->name('users-show');
 
 // eliminar o marcar como no activo. deberia ser verbo 'delete' en vez de patch, pero no se elimina realmente de la DB.
-    Route::patch('users-remover/{user}', 'UserController@remover')->name('users-remover');
-});
+Route::patch('users-remover/{user}', 'UserController@remover')->name('users-remover');
 
 
 Route::get('bitacoras-index/', 'BitacoraController@index')->name('bitacoras-index');
@@ -76,3 +70,12 @@ Route::get('avances-create-up', 'AvanceController@createUp')->name('avances-crea
 Route::post('avances-up/', 'AvanceController@up')->name('avances-up');
 // TODO: descargar evidencia de algun avance (POR TERMINAR AUN)
 Route::get('avances-donwload/{evidencia}', 'AvanceController@getDownload')->name('avances-donwload');
+
+
+// Rutas para EVIDENCIAS
+
+Route::get('evidencia-create', 'EvidenciaController@create')->name('evidencia-create');
+
+Route::post('evidencia-store', 'EvidenciaController@store')->name('evidencia-store');
+
+Route::get('evidencia-index/{avance}', 'EvidenciaController@index')->name('evidencia-index');

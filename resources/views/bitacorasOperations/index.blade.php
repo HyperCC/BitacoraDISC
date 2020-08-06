@@ -31,7 +31,7 @@
                 <tr>
                     <td> {{ $bitacora->titulo }}</td>
                     <td> {{ $bitacora->estado }}</td>
-                    <td> nope</td>
+                    <td> {{$bitacora->users->count()}} </td>
                     <td><a href="{{route('bitacoras-show', $bitacora)}}" class="btn btn-success px-3"> Ver</a></td>
                 </tr>
 

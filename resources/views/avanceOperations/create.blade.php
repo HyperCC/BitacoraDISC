@@ -41,7 +41,8 @@
                         <hr>
 
                         <div class="form-group">
-                            <input class="form-control shadow-sm bg-light" name="name" type="hidden" value="{{auth()->user()->name}}">
+                            <input class="form-control shadow-sm bg-light" name="name" type="hidden"
+                                   value="{{auth()->user()->name}}">
                         </div>
 
                         <div class="form-group">
@@ -49,10 +50,13 @@
                             <input class="form-control shadow-sm bg-light" name="descripcion" type="text">
                         </div>
 
+                        <input class="form-control shadow-sm bg-light" name="name_evid" type="hidden" value="Indefinido">
+
                         <div class="form-group">
                             <label for="archivo"> Archivo </label>
                             <br>
-                            <input accept="image/jpg, image/jpeg, application/pdf, .docx" class="" name="archivo" type="file">
+                            <input accept="image/jpg, image/jpeg, application/pdf, .docx" class="" name="archivo"
+                                   type="file">
                         </div>
 
                         <hr>

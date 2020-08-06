@@ -26,7 +26,7 @@
 
                     <div class="form-group">
                         <label for="titulo"> Titulo </label>
-                        <input class="form-control shadow-sm bg-light" name="titulo" type="text" required>
+                        <input class="form-control shadow-sm bg-light" name="titulo" type="text">
                     </div>
 
                     <script>

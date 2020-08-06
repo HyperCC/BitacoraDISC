@@ -44,6 +44,14 @@
 
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
+                                    <p class="input-group-text">Disponibilidad</p>
+                                </div>
+                                <p class="form-control"
+                                   aria-describedby="basic-addon3"> {{ $user->disponibilidad }} </p>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
                                     <p class="input-group-text">Rol</p>
                                 </div>
                                 <p class="form-control" aria-describedby="basic-addon3"> {{ $user->rol }} </p>
@@ -64,27 +72,44 @@
                                 <p class="form-control" aria-describedby="basic-addon3"> {{ $user->estado }} </p>
                             </div>
 
+                            <!-- BOTON DE ELIMINAR O REACTIVACION DEL USUARIO -->
                             @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Admin')
                                 <div class="py-3">
                                     <a class="btn btn-lg btn-outline-warning btn-block rounded-pill mb-2 text-dark"
                                        href="{{ route('users-edit', $user) }}"> Editar </a>
 
-                                    <form method="POST" action="{{ route('users-remover', $user) }}">
-                                        @csrf
-                                        @method('PATCH')
-                                        <input type="hidden" name="estado" value="Removido">
+                                    @if($user->rol!=='Admin')
+                                        <form method="POST" action="{{ route('users-remover', $user) }}">
+                                            @csrf
+                                            @method('PATCH')
+                                            @if($user->estado == 'Activo')
+                                                <input type="hidden" name="estado" value="Removido">
+                                                <input type="hidden" name="disponibilidad" value="No">
+                                            @else
+                                                <input type="hidden" name="estado" value="Activo">
+                                                <input type="hidden" name="disponibilidad" value="Si">
+                                            @endif
 
-                                        <a class="btn btn-lg btn-outline-danger btn-block rounded-pill"
-                                           data-toggle="modal"
-                                           data-target="#eliminarUsuario"
-                                           type="submit">
-                                            Eliminar
-                                        </a>
+                                            @if($user->estado == 'Activo')
+                                                <a class="btn btn-lg btn-outline-danger btn-block rounded-pill"
+                                                   data-toggle="modal" data-target="#eliminarUsuario" type="submit">
+                                                    Eliminar
+                                                </a>
 
-                                        <!-- Modal | Mensaje de alerta para confirmacion de eliminacion de un usuario -->
-                                        @include('helpers.modalEliminarUsuario')
+                                                <!-- Modal | Mensaje de alerta para confirmacion de eliminacion de un usuario -->
+                                                @include('helpers.modalEliminarUsuario')
+                                            @else
+                                                <a class="btn btn-lg btn-outline-danger btn-block rounded-pill"
+                                                   data-toggle="modal" data-target="#reactivarUsuario" type="submit">
+                                                    Reactivar
+                                                </a>
 
-                                    </form>
+                                                <!-- Modal | Mensaje de alerta para confirmacion de REACTVACION de un usuario -->
+                                                @include('helpers.modalReactivarUsuario')
+                                            @endif
+
+                                        </form>
+                                    @endif
                                 </div>
                             @endif
 

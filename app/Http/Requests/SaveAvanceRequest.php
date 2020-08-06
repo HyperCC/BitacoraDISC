@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SaveBitacoraRequest extends FormRequest
+class SaveAvanceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,18 @@ class SaveBitacoraRequest extends FormRequest
     public function rules()
     {
         return [
-            'titulo'=>'required|min:3',
-            'estado'=>'',
-            'causa_renuncia'=>''
+            'nombre' => '',
+            'descripcion' => 'required|min:12',
+            'user_id' => '',
+            'bitacora_id' => ''
         ];
     }
 
     public function messages()
     {
         return [
-            'titulo.required'=>'Debe ingresar un titulo para la Bitacora',
-            'titulo.min'=>'Debe ingresar un titulo de almenos 3 caracteres para la Bitacora'
+            'descripcion.required'=>'Debe ingresar la descripción del Avance',
+            'descripcion.min'=>'La descripción debe tener al menos 12 caracteres'
         ];
     }
 }

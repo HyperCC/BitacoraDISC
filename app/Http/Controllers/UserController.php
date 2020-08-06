@@ -141,9 +141,9 @@ class UserController extends Controller
 
     public function remover(User $user)
     {
-
         $user->update([
-            'estado' => request('estado')
+            'estado' => request('estado'),
+            'disponibilidad'=>\request('disponibilidad')
         ]);
         return redirect()->route('users-index', $user);
     }

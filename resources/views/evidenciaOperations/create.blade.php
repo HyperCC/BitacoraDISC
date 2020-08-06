@@ -14,7 +14,7 @@
 
                 @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante' and \Illuminate\Support\Facades\Auth::user()->disponibilidad == 'No')
 
-                    <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{ route('avances-up') }}"
+                    <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{ route('evidencia-store') }}"
                           enctype="multipart/form-data">
 
                         @csrf
@@ -44,7 +44,7 @@
 
                                 <select class="form-control shadow-sm custom-select" name="avance_id">
                                     @foreach($bita->avances as $avance)
-                                        <option value="{{$actual = $avance->id}}">
+                                        <option value="{{$avance->id}}">
                                             {{$avance->nombre}} ({{$avance->created_at}})
                                         </option>
                                     @endforeach

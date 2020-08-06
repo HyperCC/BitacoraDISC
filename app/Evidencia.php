@@ -12,4 +12,5 @@ class Evidencia extends Model
     {
         return $this->belongsTo(Avance::class);
     }
+
 }

@@ -21,9 +21,9 @@ class Avance extends Model
         return $this->belongsTo(Bitacora::class);
     }
 
-    public function evidencia()
+    public function evidencias()
     {
-        return $this->hasOne(Evidencia::class);
+        return $this->hasMany(Evidencia::class);
     }
 
 }

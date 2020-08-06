@@ -82,7 +82,7 @@
                             </div>
                         </div>
 
-                    @if(\Illuminate\Support\Facades\Auth::user()->rol != 'Estudiante')
+                    @if(\Illuminate\Support\Facades\Auth::user()->rol != 'Estudiante' and \Illuminate\Support\Facades\Auth::user()->rol!= 'Profesor')
                         <!-- EN CASO DE TENER LA BITACORA FINALIZADA -->
                             <div>
                                 @if($bitacora->estado == 'Finalizada')
@@ -248,10 +248,11 @@
                         <td>{{ $ava->descripcion }}</td>
                         <td> {{ $ava->created_at }} </td>
 
-                        @if($ava->evidencia)
-                            <td><a href="{{ route('avances-donwload', $ava->evidencia) }}" class="btn btn-success px-3"> Evidencia</a></td>
+                        @if($ava->evidencias->count() > 0)
+                            <td><a href="{{ route('evidencia-index', $ava) }}" class="btn btn-success px-3">
+                                    Evidencia</a></td>
                         @else
-                            <td><a href="#" class="btn btn-success px-3 disabled">Sin Evidencia</a></td>
+                            <td><a href="#" class="btn btn-success px-3 disabled">Sin Evidencias</a></td>
                         @endif
                     </tr>
 

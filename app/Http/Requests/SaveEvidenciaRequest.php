@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SaveBitacoraRequest extends FormRequest
+class SaveEvidenciaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,19 @@ class SaveBitacoraRequest extends FormRequest
     public function rules()
     {
         return [
-            'titulo'=>'required|min:3',
-            'estado'=>'',
-            'causa_renuncia'=>''
+            'ubi_archivo' => '',
+            'name_alumno' => '',
+            'name_evid' => 'required|min:3',
+            'avance_id' => ''
         ];
     }
 
     public function messages()
     {
         return [
-            'titulo.required'=>'Debe ingresar un titulo para la Bitacora',
-            'titulo.min'=>'Debe ingresar un titulo de almenos 3 caracteres para la Bitacora'
+            //'ubi_archivo.required' => 'Debe elegir un archivo para subirlo como Evidencia',
+            'name_evid.required' => 'Debe ingresar el nombre de la Evidencia',
+            'name_evid.min' => 'El nombre de la Evidencia debe tener al menos 3 caracteres'
         ];
     }
 }
