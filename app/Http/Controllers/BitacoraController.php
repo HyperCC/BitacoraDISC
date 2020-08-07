@@ -131,13 +131,14 @@ class BitacoraController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Bitacora $bitacora)
+    public function update(SaveBitacoraRequest $request, Bitacora $bitacora)
     {
+
         $bitacora->update([
             'titulo' => request('titulo'),
             'estado' => \request('estado'),
             'causa_renuncia' => 'ninguna'
-        ]);
+        ], $request->validated());
 
         return redirect()->route('bitacoras-show', $bitacora);
     }
