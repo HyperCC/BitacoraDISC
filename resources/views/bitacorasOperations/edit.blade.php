@@ -37,7 +37,10 @@
                                    value="Activa"> Si
                         </span>
                         </div>
+                    @else
+                        <input type="hidden" value="{{ old('estado', $bitacora->estado) }}" name="estado">
                     @endif
+
                     <hr>
 
                     <div class="py-3">
