@@ -10,8 +10,6 @@
 
             <div class="col-12 col-sm-10 col-lg-6 mx-auto my-3">
 
-                @extends('helpers.validate_errors')
-
                 <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{ route('users-store') }}">
 
                     @csrf

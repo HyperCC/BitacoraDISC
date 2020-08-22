@@ -52,7 +52,7 @@ class UserController extends Controller
     public function store(SaveUserRequest $request)
     {
         $consulta = DB::select('select name from users where rol=:rol', ['rol' => 'Encargado Titulación']);
-        if ($consulta and \request('rol')=='Encargado Titulación') {
+        if ($consulta and \request('rol') == 'Encargado Titulación') {
             throw ValidationException::withMessages([
                 'Ya existe un Encargado de Titulación, debe ingresar otro tipo de Usuarios',
             ]);
@@ -116,9 +116,14 @@ class UserController extends Controller
      */
     public function update(User $user)
     {
-        //$user->update($request->validated());
+        $consulta = DB::select('select name from users where rol=:rol', ['rol' => 'Encargado Titulación']);
+        if ($consulta and \request('rol') == 'Encargado Titulación') {
+            throw ValidationException::withMessages([
+                'Ya existe un Encargado de Titulación, debe ingresar otro tipo de Usuarios',
+            ]);
+        }
 
-        $theData = \request()->validate([
+        $theData = request()->validate([
             'name' => '',
             'email' => 'required|unique:users,email,' . $user->id,
             'rut' => '',

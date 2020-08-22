@@ -10,8 +10,6 @@
 
             <div class="col-12 col-sm-10 col-lg-6 mx-auto my-3">
 
-                @include('helpers.validate_errors')
-
                 <form class="bg-white py-3 px-4 shadow rounded" method="POST"
                       action="{{ route('users-update', $user) }}">
 
@@ -45,9 +43,9 @@
                     <div class="form-group">
                         <label for="carrera"> Carrera </label>
                         <select class="form-control shadow-sm custom-select" name="carrera">
-                            <option @if($user->rol=='No aplica') selected @endif> No aplica</option>
-                            <option @if($user->rol=='ICCI') selected @endif> ICCI</option>
-                            <option @if($user->rol=='IenCI') selected @endif> IenCI</option>
+                            <option @if($user->carrera=='No aplica') selected @endif> No aplica</option>
+                            <option @if($user->carrera=='ICCI') selected @endif> ICCI</option>
+                            <option @if($user->carrera=='IenCI') selected @endif> IenCI</option>
                         </select>
                     </div>
 
