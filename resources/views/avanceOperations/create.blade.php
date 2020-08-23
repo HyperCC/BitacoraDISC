@@ -12,8 +12,12 @@
 
                 @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante' & \Illuminate\Support\Facades\Auth::user()->disponibilidad == 'No' & auth()->user()->bitacoras->first()->estado != 'Finalizada' )
 
+<<<<<<< HEAD
                     <form class="bg-white py-3 px-4 shadow rounded" method="POST"
                           action="{{route('avances-store')}}" enctype="multipart/form-data">
+=======
+                    <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{route('avances-store')}}" enctype="multipart/form-data">
+>>>>>>> 2c60b4224da0d2b3a0b79af3a849a8907a059aa7
 
                         @csrf
 

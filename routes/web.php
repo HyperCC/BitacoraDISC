@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -79,3 +80,10 @@ Route::get('evidencia-create', 'EvidenciaController@create')->name('evidencia-cr
 Route::post('evidencia-store', 'EvidenciaController@store')->name('evidencia-store');
 
 Route::get('evidencia-index/{avance}', 'EvidenciaController@index')->name('evidencia-index');
+
+
+
+//RUTAS para comentarios
+Route::get('comentario-create/{avance}', 'ComentarioController@create')->name('comentario-create');
+Route::post('comentario-store', 'ComentarioController@store')->name('comentario-store');
+Route::get('comentario-index/{avance}', 'ComentarioController@index')->name('comentario-index');

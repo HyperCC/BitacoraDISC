@@ -245,6 +245,50 @@
                         <th scope="col">Rol</th>
                         <th scope="col"> Ver</th>
                     </tr>
+<<<<<<< HEAD
+                @endforelse
+                </tbody>
+
+            </table>
+            <br>
+
+            <!-- TABLAS DE PROFESORES -->
+            <h2 class="mx-auto mt-lg-3"> Registros de Avances: </h2>
+            <table class="table table-hover table-responsive-sm">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Estudiante</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col"> Fecha</th>
+                    <th scope="col"> Ver</th>
+                    <th scope="col"> Comentarios</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                @forelse($bitacora->avances as $ava)
+                    <tr>
+                        <td>{{ $ava->user->name }}</td>
+                        <td>{{ $ava->descripcion }}</td>
+                        <td> {{ $ava->created_at }} </td>
+
+                        @if($ava->evidencias->count() > 0)
+                            <td><a href="{{ route('evidencia-index', $ava) }}" class="btn btn-success px-3">
+                                    Evidencia</a></td>
+                        @else
+                            <td><a href="#" class="btn btn-success px-3 disabled">Sin Evidencias</a></td>
+                        @endif
+
+                       
+                            <td><a href="{{ route('comentario-index',$ava) }}" class="btn btn-success px-3">
+                                    Comentario</a></td>
+                       
+                            
+                        
+                            
+                        
+                    </tr>
+=======
                     </thead>
 
                     <tbody>
@@ -271,6 +315,7 @@
 
                 </table>
                 <br>
+>>>>>>> b76aeae34f98f8bd99e753cf0b88b301c90c43e7
 
                 <!-- TABLAS DE PROFESORES -->
                 <h2 class="mx-auto mt-lg-3"> Registros de Avances: </h2>
