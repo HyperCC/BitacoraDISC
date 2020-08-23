@@ -246,6 +246,7 @@
                     <th scope="col">Descripción</th>
                     <th scope="col"> Fecha</th>
                     <th scope="col"> Ver</th>
+                    <th scope="col"> Comentarios</th>
                 </tr>
                 </thead>
 
@@ -262,6 +263,15 @@
                         @else
                             <td><a href="#" class="btn btn-success px-3 disabled">Sin Evidencias</a></td>
                         @endif
+
+                       
+                            <td><a href="{{ route('comentario-index',$ava) }}" class="btn btn-success px-3">
+                                    Comentario</a></td>
+                       
+                            
+                        
+                            
+                        
                     </tr>
 
                 @empty

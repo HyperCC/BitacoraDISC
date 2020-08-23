@@ -1,4 +1,4 @@
-@extends('helpers.template')
+\@extends('helpers.template')
 @section('title_head', 'Editar Bitacora')
 @section('content_body')
 
@@ -37,6 +37,9 @@
                                    value="Activa"> Si
                         </span>
                         </div>
+                   @else
+                    <input type="hidden" value = "{{ old('estado', $bitacora->estado) }}" name = "estado">
+
                     @endif
                     <hr>
 

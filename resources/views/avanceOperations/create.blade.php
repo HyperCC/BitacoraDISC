@@ -14,8 +14,7 @@
 
                 @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante' and \Illuminate\Support\Facades\Auth::user()->disponibilidad == 'No')
 
-                    <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{route('avances-store')}}"
-                          enctype="multipart/form-data">
+                    <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{route('avances-store')}}" enctype="multipart/form-data">
 
                         @csrf
 

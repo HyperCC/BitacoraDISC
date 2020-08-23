@@ -27,7 +27,7 @@
                         </tbody>
 
                         <div class="text-center">
-                            <span class="display-3">Crear un Evidencia</span>
+                            <span class="display-3">Crear una Evidencia</span>
                         </div>
 
                         <hr>

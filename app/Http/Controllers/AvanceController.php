@@ -50,7 +50,7 @@ class AvanceController extends Controller
             'descripcion' => request('descripcion'),
             'user_id' => request('user_id'),
             'bitacora_id' => request('bita_id')
-        ], $request->validated());
+        ]);
 
         if (request('archivo') !== null) {
             Evidencia::create([
@@ -58,23 +58,32 @@ class AvanceController extends Controller
                 'ubi_archivo' => request('archivo')->store('public'),
                 'name_alumno' => request('name'),
                 'avance_id' => $avance->id
-            ], $evidenciaRequest->validated());
+            ]);
         }
 
         return view('home');
     }
 
+
+   
+
+
+    
     //TODO: IMPLEMENTAR LA DESCARGA DE EVIDENCIAS
     public function getDownload(Evidencia $evidencia)
     {
-        //PDF file is stored under project/public/download/info.pdf
-        $file = $evidencia->ubi_archivo;
+        
+        //PDF file is stored under project/public/ashjaks.pdf
+        
+       
+        $file = storage_path('app/'.$evidencia->ubi_archivo);
+        
+
 
         $headers = array(
             'Content-Type: .*',
         );
-
-        return Response::download($file, 'evidencia', $headers);
+        return response()->download($file,'', $headers);
     }
 
     /**
@@ -121,4 +130,6 @@ class AvanceController extends Controller
     {
         //
     }
+
+
 }

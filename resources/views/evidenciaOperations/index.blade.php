@@ -6,7 +6,7 @@
 
     <div class="container text-center">
 
-        <p class="display-4 my-4"> Todas las Evidencias para Avance {{ $avance->nombre }}</p>
+        <p class="display-4 my-4"> Todas las evidencias para Avance "{{ $avance->descripcion }}"</p>
 
         <hr>
 
@@ -24,7 +24,7 @@
                 <tr>
                     <td> {{ $evidencia->name_evid }} </td>
                     <td> {{ $evidencia->name_alumno }} </td>
-                    <td><a href="#" class="btn btn-success px-3"> Descargar</a></td>
+                    <td><a href="{{route('avances-donwload',$evidencia)}}" class="btn btn-success px-3"> Descargar</a></td>
                 </tr>
             @empty
                 <tr>

@@ -133,6 +133,7 @@ class BitacoraController extends Controller
      */
     public function update(Bitacora $bitacora)
     {
+       
         $bitacora->update([
             'titulo' => request('titulo'),
             'estado' => \request('estado'),
