@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SaveUserRequest;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 use function Sodium\compare;
 
 class UserController extends Controller
@@ -49,14 +51,21 @@ class UserController extends Controller
      */
     public function store(SaveUserRequest $request)
     {
+        $consulta = DB::select('select name from users where rol=:rol', ['rol' => 'Encargado Titulación']);
+        if ($consulta and \request('rol') == 'Encargado Titulación') {
+            throw ValidationException::withMessages([
+                'Ya existe un Encargado de Titulación, debe ingresar otro tipo de Usuarios',
+            ]);
+        }
+
         //TODO: en caso de tener doble rol.
         $us = User::create([
-            'name'=>(\request('name')==null)? 'usuario':request('name'),
-            'rut'=>(\request('rut')==null)? 'no aplica':request('rut'),
-            'carrera'=>\request('carrera'),
-            'email'=>request('email'),
-            'password'=>\request('password'),
-            'rol'=>\request('rol'),
+            'name' => (\request('name') == null) ? 'usuario' : request('name'),
+            'rut' => (\request('rut') == null) ? 'no aplica' : request('rut'),
+            'carrera' => \request('carrera'),
+            'email' => request('email'),
+            'password' => \request('password'),
+            'rol' => \request('rol'),
         ], $request->validated());
 
         $us->fill([
@@ -107,13 +116,18 @@ class UserController extends Controller
      */
     public function update(User $user)
     {
-        //$user->update($request->validated());
+        $consulta = DB::select('select name from users where rol=:rol', ['rol' => 'Encargado Titulación']);
+        if ($consulta and \request('rol') == 'Encargado Titulación') {
+            throw ValidationException::withMessages([
+                'Ya existe un Encargado de Titulación, debe ingresar otro tipo de Usuarios',
+            ]);
+        }
 
-        $theData = \request()->validate([
+        $theData = request()->validate([
             'name' => '',
             'email' => 'required|unique:users,email,' . $user->id,
             'rut' => '',
-            'carrera'=>'',
+            'carrera' => '',
             'password' => '',
             'rol' => 'required',
         ]);
@@ -143,7 +157,7 @@ class UserController extends Controller
     {
         $user->update([
             'estado' => request('estado'),
-            'disponibilidad'=>\request('disponibilidad')
+            'disponibilidad' => \request('disponibilidad')
         ]);
         return redirect()->route('users-index', $user);
     }

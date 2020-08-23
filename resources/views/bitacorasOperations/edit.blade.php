@@ -8,8 +8,6 @@
 
             <div class="col-12 col-sm-10 col-lg-6 mx-auto my-3">
 
-                @include('helpers.validate_errors')
-
                 <form class="bg-white py-3 px-4 shadow rounded" method="POST"
                       action="{{ route('bitacoras-update', $bitacora) }}">
 
@@ -23,10 +21,119 @@
                     <hr>
 
                     <div class="form-group">
-                        <label class="ml-1" for="name"> Titulo </label>
+                        <label class="ml-1" for="name"><h5>Titulo</h5></label>
                         <input class="form-control shadow-sm bg-light" name="titulo" type="text"
                                value="{{ old('titulo', $bitacora->titulo) }}">
                     </div>
+                    <br>
+
+                    <!-- TABLAS DE PROFESORES -->
+                    <div class="mx-auto">
+
+                        <h5 class="mt-lg-3"> Profesores actuales: </h5>
+                        <table class="table table-hover table-responsive-sm">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Rol</th>
+                                <th scope="col"> Accion</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            @forelse($bitacora->users as $us)
+                                @if($us->rol == 'Profesor' or $us->rol =='Encargado Titulación')
+                                    <tr>
+                                        <td> {{ $us->name }}</td>
+                                        <td> {{ $us->email }}</td>
+                                        <td> {{ $us->rol }}</td>
+
+                                        <td><a href="#" class="btn btn-danger px-3"> Eliminar </a></td>
+                                    </tr>
+                                @endif
+
+                            @empty
+                                <tr>
+                                    <th> No hay Profesores</th>
+                                </tr>
+                            @endforelse
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                    <!-- PROFESORES DISPONIBLES  -->
+                    <div class="form-group">
+                        <label for="id_estudiante1"><h5>Profesores disponibles:</h5></label>
+                        <select class="form-control selectalumnos" name="id_estudiante1">
+
+                            <option> Seleccione</option>
+                            @forelse(\Illuminate\Support\Facades\DB::select('select * from users where rol=:rol', ['rol'=>'Profesor']) as $us)
+                                <option value="{{$us->id}}">
+                                    {{$us->email}} ({{$us->name}})
+                                </option>
+                            @empty
+                                <h4>No hay datos</h4>
+                            @endforelse
+
+                        </select>
+                    </div>
+                    <br>
+
+
+                    <!-- TABLA DE ALUMNOS -->
+                    <div class="mx-auto">
+                        <h5 class="mt-lg-3"> Alumnos actuales: </h5>
+                        <table class="table table-hover table-responsive-sm">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Rol</th>
+                                <th scope="col"> Accion</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            @forelse($bitacora->users as $us)
+                                @if($us->rol == 'Estudiante')
+                                    <tr>
+                                        <td> {{ $us->name }}</td>
+                                        <td> {{ $us->email }}</td>
+                                        <td> {{ $us->rol }}</td>
+                                        <td><a href="#" class="btn btn-danger px-3"> Eliminar </a></td>
+
+                                    </tr>
+                                @endif
+                            @empty
+                                <tr>
+                                    <th> No hay Alumnos</th>
+                                </tr>
+                            @endforelse
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                    <!-- ALUMNOS DISPONIBLES  -->
+                    <div class="form-group">
+                        <label for="id_estudiante1"><h5>Estudiantes disponibles: </h5></label>
+                        <select class="form-control selectalumnos" name="id_estudiante1">
+
+                            <option> Seleccione</option>
+                            @forelse(\Illuminate\Support\Facades\DB::select('select * from users where rol=:rol and disponibilidad=:disp', ['rol'=>'Estudiante', 'disp'=>'Si']) as $us)
+                                <option value="{{$us->id}}">
+                                    {{$us->email}} ({{$us->name}})
+                                </option>
+                            @empty
+                                <h4>No hay datos</h4>
+                            @endforelse
+
+                        </select>
+                    </div>
+
+                    <input type="hidden" value="{{ old('estado', $bitacora->estado) }}" name="estado">
 
                     @if($bitacora->estado=="Finalizada")
                         <div class="form-group">
@@ -41,6 +148,8 @@
                     <input type="hidden" value = "{{ old('estado', $bitacora->estado) }}" name = "estado">
 
                     @endif
+                    <br>
+
                     <hr>
 
                     <div class="py-3">
