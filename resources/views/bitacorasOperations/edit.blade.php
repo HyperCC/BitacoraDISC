@@ -8,23 +8,27 @@
 
             <div class="col-12 col-sm-10 col-lg-6 mx-auto my-3">
 
-                <form class="bg-white py-3 px-4 shadow rounded" method="POST"
-                      action="{{ route('bitacoras-update', $bitacora) }}">
+                <div class="bg-white py-3 px-4 shadow rounded">
 
-                    @csrf
-                    @method('PATCH')
+                    <form method="POST"
+                          action="{{ route('bitacoras-update', $bitacora) }}">
 
-                    <div class="text-center">
-                        <span class="display-3">Editar una Bitacora</span>
-                    </div>
+                        @csrf
+                        @method('PATCH')
 
-                    <hr>
+                        <div class="text-center">
+                            <span class="display-3">Editar una Bitacora</span>
+                        </div>
 
-                    <div class="form-group">
-                        <label class="ml-1" for="name"><h5>Titulo</h5></label>
-                        <input class="form-control shadow-sm bg-light" name="titulo" type="text"
-                               value="{{ old('titulo', $bitacora->titulo) }}">
-                    </div>
+                        <hr>
+
+                        <div class="form-group">
+                            <label class="ml-1" for="name"><h5>Titulo</h5></label>
+                            <input class="form-control shadow-sm bg-light" name="titulo" type="text"
+                                   value="{{ old('titulo', $bitacora->titulo) }}">
+                        </div>
+                    </form>
+
                     <br>
 
                     <!-- TABLAS DE PROFESORES -->
@@ -65,22 +69,33 @@
 
                     <!-- PROFESORES DISPONIBLES  -->
                     <div class="form-group">
-                        <label for="id_estudiante1"><h5>Profesores disponibles:</h5></label>
-                        <select class="form-control selectalumnos" name="id_estudiante1">
 
-                            <option> Seleccione</option>
-                            @forelse(\Illuminate\Support\Facades\DB::select('select * from users where rol=:rol', ['rol'=>'Profesor']) as $us)
-                                <option value="{{$us->id}}">
-                                    {{$us->email}} ({{$us->name}})
-                                </option>
-                            @empty
-                                <h4>No hay datos</h4>
-                            @endforelse
+                        <form action="#" method="post">
+                            @csrf
 
-                        </select>
+                            <label for="id_estudiante1"><h5>Profesores disponibles:</h5></label>
+                            <select class="form-control selectalumnos" name="id_estudiante1">
+
+                                <option> Seleccione</option>
+                                @forelse(\Illuminate\Support\Facades\DB::select('select * from users where rol=:rol', ['rol'=>'Profesor']) as $us)
+                                    <option value="{{$us->id}}">
+                                        {{$us->email}} ({{$us->name}})
+                                    </option>
+                                @empty
+                                    <h4>No hay datos</h4>
+                                @endforelse
+
+                            </select>
+
+                            <div class="row mx-auto mt-3">
+                                <a href="#" class="col-4 btn btn-success mx-auto"> Agregar Profesor </a>
+                            </div>
+
+                        </form>
+
                     </div>
                     <br>
-
+                    <hr>
 
                     <!-- TABLA DE ALUMNOS -->
                     <div class="mx-auto">
@@ -116,23 +131,6 @@
                         </table>
                     </div>
 
-                    <!-- ALUMNOS DISPONIBLES  -->
-                    <div class="form-group">
-                        <label for="id_estudiante1"><h5>Estudiantes disponibles: </h5></label>
-                        <select class="form-control selectalumnos" name="id_estudiante1">
-
-                            <option> Seleccione</option>
-                            @forelse(\Illuminate\Support\Facades\DB::select('select * from users where rol=:rol and disponibilidad=:disp', ['rol'=>'Estudiante', 'disp'=>'Si']) as $us)
-                                <option value="{{$us->id}}">
-                                    {{$us->email}} ({{$us->name}})
-                                </option>
-                            @empty
-                                <h4>No hay datos</h4>
-                            @endforelse
-
-                        </select>
-                    </div>
-
                     <input type="hidden" value="{{ old('estado', $bitacora->estado) }}" name="estado">
 
                     @if($bitacora->estado=="Finalizada")
@@ -158,8 +156,7 @@
                            href="{{ route('bitacoras-index') }}"> Cancelar </a>
                     </div>
 
-                </form>
-
+                </div>
             </div>
         </div>
 

@@ -1,6 +1,6 @@
 @extends('helpers.template')
 
-@section('title_head', 'Usuario | $user->name')
+@section('title_head', 'Welcome')
 
 @section('content_body')
 
@@ -9,7 +9,8 @@
         <div class="row">
             <div class="col-12 col-lg-6">
 
-                <h1 class="display-1 text-primary">Bitacora DISC </h1>
+                <img class="img-fluid m-3" src="img/logo_bita_completo.svg"
+                     alt="administracion bitacora ucn">
 
                 <p class="lead text-secondary pb-3">
                     Bitácora Web para el seguimiento y control de los trabajos de titulación del DISC
@@ -18,7 +19,8 @@
                 @auth
                     <div class="pt-3">
                         <h4 class="text-center ml-4 pb-3"> Hola {{ auth()->user()->email }} </h4>
-                        <a href="{{ route('home') }}" class="btn btn-info btn-lg btn-block rounded-pill" type="submit"> ¡Comencemos! </a>
+                        <a href="{{ route('home') }}" class="btn btn-info btn-lg btn-block rounded-pill" type="submit">
+                            ¡Comencemos! </a>
                     </div>
 
                 @else

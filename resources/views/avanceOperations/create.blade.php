@@ -10,10 +10,10 @@
 
             <div class="col-12 col-sm-10 col-lg-6 mx-auto my-3">
 
-                @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante' and \Illuminate\Support\Facades\Auth::user()->disponibilidad == 'No')
+                @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante' & \Illuminate\Support\Facades\Auth::user()->disponibilidad == 'No' & auth()->user()->bitacoras->first()->estado != 'Finalizada' )
 
-                    <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{route('avances-store')}}"
-                          enctype="multipart/form-data">
+                    <form class="bg-white py-3 px-4 shadow rounded" method="POST"
+                          action="{{route('avances-store')}}" enctype="multipart/form-data">
 
                         @csrf
 
@@ -48,7 +48,8 @@
                             <input class="form-control shadow-sm bg-light" name="descripcion" type="text">
                         </div>
 
-                        <input class="form-control shadow-sm bg-light" name="name_evid" type="hidden" value="Indefinido">
+                        <input class="form-control shadow-sm bg-light" name="name_evid" type="hidden"
+                               value="Indefinido">
 
                         <div class="form-group">
                             <label for="archivo"> Archivo </label>
@@ -67,9 +68,10 @@
                         </div>
                     </form>
 
-                @endif
-                @if(\Illuminate\Support\Facades\Auth::user()->disponibilidad == 'Si')
-                    <h1>No tienes bitácoras inscritas.</h1>
+                @elseif(\Illuminate\Support\Facades\Auth::user()->disponibilidad == 'Si')
+                    <h1 class="text-center">No tienes Bitácoras inscritas.</h1>
+                @else
+                    <h1 class="text-center">No se pueden registrar Evidencias para esta Bitácora, ya que ha finalizado</h1>
                 @endif
             </div>
         </div>
