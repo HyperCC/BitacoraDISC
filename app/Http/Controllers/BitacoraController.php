@@ -133,11 +133,7 @@ class BitacoraController extends Controller
      */
     public function update(SaveBitacoraRequest $request, Bitacora $bitacora)
     {
-<<<<<<< HEAD
        
-=======
-
->>>>>>> b76aeae34f98f8bd99e753cf0b88b301c90c43e7
         $bitacora->update([
             'titulo' => request('titulo'),
             'estado' => \request('estado'),

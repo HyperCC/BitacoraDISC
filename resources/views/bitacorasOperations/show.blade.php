@@ -191,7 +191,7 @@
                                     </a>
                                 </div>
 
-                            @endif
+                        @endif
 
                         </div>
                     </div>
@@ -245,7 +245,6 @@
                         <th scope="col">Rol</th>
                         <th scope="col"> Ver</th>
                     </tr>
-<<<<<<< HEAD
                 @endforelse
                 </tbody>
 
@@ -285,37 +284,9 @@
                        
                             
                         
-                            
+                                    @empty       
                         
                     </tr>
-=======
-                    </thead>
-
-                    <tbody>
-                    @forelse($bitacora->users as $us)
-                        @if($us->rol == 'Estudiante')
-                            <tr>
-                                <td> {{ $us->name }}</td>
-                                <td> {{ $us->email }}</td>
-                                <td> {{ $us->rol }}</td>
-                                @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante')
-                                    <td><a href="#" class="btn btn-success px-3 disabled"> No disponible</a></td>
-                                @else
-                                    <td><a href="{{route('users-show', $us)}}" class="btn btn-success px-3"> Ver</a>
-                                    </td>
-                                @endif
-                            </tr>
-                        @endif
-                    @empty
-                        <tr>
-                            <th> No hay ningún Alumno asociado a esta Bitacora</th>
-                        </tr>
-                    @endforelse
-                    </tbody>
-
-                </table>
-                <br>
->>>>>>> b76aeae34f98f8bd99e753cf0b88b301c90c43e7
 
                 <!-- TABLAS DE PROFESORES -->
                 <h2 class="mx-auto mt-lg-3"> Registros de Avances: </h2>
