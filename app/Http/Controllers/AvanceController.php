@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Avance;
+use App\Bitacora;
 use App\Evidencia;
 use App\Http\Requests\SaveAvanceRequest;
 use App\Http\Requests\SaveEvidenciaRequest;
+use App\Notifications\NotificateAvance;
 use Illuminate\Support\Facades\Auth;
 use Response;
 use Illuminate\Http\Request;
@@ -61,6 +63,17 @@ class AvanceController extends Controller
             ], $evidenciaRequest->validated());
         }
 
+        // bitacora en la ue se hace el avance
+        $bitacora = Bitacora::find(request('bita_id'));
+
+        // usuarios para recibir notificaciones sobre la bitacora
+        $users = $bitacora->users;
+
+        // enviar notificacion
+        foreach ($users as $us)
+            if ($us->rol == 'Profesor' || $us->rol == 'Encargado Titulación')
+                $us->notify(new NotificateAvance('Avance', $bitacora->titulo));
+
         return view('home');
     }
 
@@ -70,13 +83,13 @@ class AvanceController extends Controller
         //PDF file is stored under project/public/ashjaks.pdf
 
 
-        $file = storage_path('app/'.$evidencia->ubi_archivo);;
+        $file = storage_path('app/' . $evidencia->ubi_archivo);;
 
         $headers = array(
             'Content-Type: .*',
         );
 
-        return response()->download($file,'', $headers);
+        return response()->download($file, '', $headers);
 
     }
 

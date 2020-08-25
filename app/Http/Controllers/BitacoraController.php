@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Avance;
 use App\Bitacora;
 use App\BitacoraUser;
 use App\Http\Requests\SaveBitacoraRequest;
+use App\Notifications\NotificateComentario;
+use App\Notifications\NotificateFinalizacion;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -163,6 +166,14 @@ class BitacoraController extends Controller
             'estado' => $nuevoEstado,
             'causa_renuncia' => $nuevaRazon
         ]);
+
+        // usuarios para recibir notificaciones sobre la bitacora
+        $users = $bitacora->users;
+
+        // enviar notificacion
+        foreach ($users as $us)
+            if (\auth()->user()->id !== $us->id)
+                $us->notify(new NotificateFinalizacion($bitacora->titulo));
 
         return redirect()->route('bitacoras-index', $bitacora);
     }

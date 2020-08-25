@@ -1,6 +1,6 @@
 @extends('helpers.template')
 
-@section('title_head', 'Usuario | $user->name')
+@section('title_head', 'Bienvenido')
 
 @section('content_body')
 
@@ -9,7 +9,8 @@
         <div class="row">
             <div class="col-12 col-lg-6">
 
-                <h1 class="display-1 text-primary">Bitacora DISC </h1>
+                <img class="img-fluid m-3" src="img/logo_bita_completo.svg"
+                     alt="administracion bitacora ucn">
 
                 <p class="lead text-secondary pb-3">
                     Bitácora Web para el seguimiento y control de los trabajos de titulación del DISC

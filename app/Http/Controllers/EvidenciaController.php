@@ -6,6 +6,7 @@ use App\Avance;
 use App\Bitacora;
 use App\Evidencia;
 use App\Http\Requests\SaveEvidenciaRequest;
+use App\Notifications\NotificateAvance;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,7 @@ class EvidenciaController extends Controller
      * @return \Illuminate\Http\Response
      */
     // SUBIR UNA EVIDENCIA PARA ALGUN AVANCE
-    public function create( )
+    public function create()
     {
         return view('evidenciaOperations.create');
     }
@@ -52,6 +53,17 @@ class EvidenciaController extends Controller
             'name_evid' => \request('name_evid'),
             'avance_id' => \request('avance_id')
         ], $request->validated());
+
+        // bitacora en la ue se hace el avance
+        $bitacora = Avance::find(request('avance_id'))->bitacora;
+
+        // usuarios para recibir notificaciones sobre la bitacora
+        $users = $bitacora->users;
+
+        // enviar notificacion
+        foreach ($users as $us)
+            if ($us->rol == 'Profesor' || $us->rol == 'Encargado Titulación')
+                $us->notify(new NotificateAvance('Evidencia', $bitacora->titulo));
 
         return view('home');
     }

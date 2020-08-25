@@ -1,5 +1,6 @@
 <?php
 
+use App\Notifications\NotificateAvance;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    //auth()->user()->notify(new NotificateAvance('Avance', 'bita01'));
     return view('welcome');
 });
 
@@ -75,12 +77,13 @@ Route::get('avances-donwload/{evidencia}', 'AvanceController@getDownload')->name
 // Rutas para EVIDENCIAS
 
 Route::get('evidencia-create', 'EvidenciaController@create')->name('evidencia-create');
-
 Route::post('evidencia-store', 'EvidenciaController@store')->name('evidencia-store');
-
 Route::get('evidencia-index/{avance}', 'EvidenciaController@index')->name('evidencia-index');
 
 //RUTAS para comentarios
 Route::get('comentario-create/{avance}', 'ComentarioController@create')->name('comentario-create');
 Route::post('comentario-store', 'ComentarioController@store')->name('comentario-store');
 Route::get('comentario-index/{avance}', 'ComentarioController@index')->name('comentario-index');
+
+// Rutas notificaciones
+Route::get('notificaciones', 'NotificationController@index')->name('notificaciones-index');

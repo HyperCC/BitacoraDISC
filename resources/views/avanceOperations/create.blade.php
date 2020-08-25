@@ -10,11 +10,13 @@
 
             <div class="col-12 col-sm-10 col-lg-6 mx-auto my-3">
 
-                @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante' and \Illuminate\Support\Facades\Auth::user()->disponibilidad == 'No')
+                @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante' & \Illuminate\Support\Facades\Auth::user()->disponibilidad == 'No' & auth()->user()->bitacoras->first()->estado != 'Finalizada' )
+
                     @foreach(auth()->user()->bitacoras as $bita)
                         @if(($bita->estado)=='Activa')
-                            <form class="bg-white py-3 px-4 shadow rounded" method="POST" action="{{route('avances-store')}}"
-                                enctype="multipart/form-data">
+                            <form class="bg-white py-3 px-4 shadow rounded" method="POST"
+                                  action="{{route('avances-store')}}"
+                                  enctype="multipart/form-data">
 
                                 @csrf
 
@@ -41,7 +43,7 @@
 
                                 <div class="form-group">
                                     <input class="form-control shadow-sm bg-light" name="name" type="hidden"
-                                        value="{{auth()->user()->name}}">
+                                           value="{{auth()->user()->name}}">
                                 </div>
 
                                 <div class="form-group">
@@ -49,42 +51,47 @@
                                     <input class="form-control shadow-sm bg-light" name="descripcion" type="text">
                                 </div>
 
-                                <input class="form-control shadow-sm bg-light" name="name_evid" type="hidden" value="Indefinido">
+                                <input class="form-control shadow-sm bg-light" name="name_evid" type="hidden"
+                                       value="Indefinido">
 
                                 <div class="form-group">
                                     <label for="archivo"> Archivo </label>
                                     <br>
                                     <input accept="image/jpg, image/jpg, application/pdf, .docx" class="" name="archivo"
-                                        type="file">
+                                           type="file">
                                 </div>
 
                                 <hr>
 
                                 <div class="py-3">
-                                    <button type="submit" class="btn btn-primary btn-lg btn-block rounded-pill"> Crear</button>
-                                    <a class="btn btn-lg btn-block btn-outline-dark rounded-pill" href="{{route('home')}}">
+                                    <button type="submit" class="btn btn-primary btn-lg btn-block rounded-pill"> Crear
+                                    </button>
+                                    <a class="btn btn-lg btn-block btn-outline-dark rounded-pill"
+                                       href="{{route('home')}}">
                                         Cancelar
                                     </a>
                                 </div>
                             </form>
 
-
-                            @else
+                        @else
                             @if(($bita->causa_renuncia)=='Aprobación del término de trabajo')
-                                        <div class="mx-auto">
-                                                    <img class="img-fluid my-3" src="{{ URL::to('/')}}/img/graduation.svg" alt="finalización de bitacora ucn">
-                                                    </div>
-
-                                                    <div class="display-3 text-center">
-                                                    <p>Esta Bitacora ha llegado a su finalización debido a su aprobación.</p>
-                                                    </div>
-                            @else
                                 <div class="mx-auto">
-                                    <img class="img-fluid my-3" src="{{ URL::to('/')}}/img/cancel.svg" alt="finalización de bitacora ucn">
+                                    <img class="img-fluid my-3" src="{{ URL::to('/')}}/img/graduation.svg"
+                                         alt="finalización de bitacora ucn">
                                 </div>
 
                                 <div class="display-3 text-center">
-                                    <p>Esta Bitacora ha finalizado debido a la no continuidad del trabajo. Lo sentimos. </p>
+                                    <p>Esta Bitacora ha llegado a su finalización debido a su aprobación.</p>
+                                </div>
+                            @else
+                                <div class="mx-auto">
+                                    <img class="img-fluid my-3" src="{{ URL::to('/')}}/img/cancel.svg"
+                                         alt="finalización de bitacora ucn">
+                                </div>
+
+                                <div class="display-3 text-center">
+                                    <p>Esta Bitacora ha finalizado debido a la no continuidad del trabajo. Lo
+                                        sentimos. </p>
                                 </div>
                             @endif
                         @endif

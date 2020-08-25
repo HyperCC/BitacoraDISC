@@ -78,7 +78,7 @@ class UserController extends Controller
             $us->save();
         }
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('flash', 'Usuario nuevo agregado correctamente!');
     }
 
     /**

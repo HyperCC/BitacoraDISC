@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Comentario;
+use App\Notifications\NotificateAvance;
+use App\Notifications\NotificateComentario;
 use Illuminate\Http\Request;
 use App\Avance;
 use App\Bitacora;
@@ -18,9 +20,9 @@ class ComentarioController extends Controller
      * @param Avance $avance
      * @return \Illuminate\Http\Response
      */
-    public function index( Avance $avance)
+    public function index(Avance $avance)
     {
-        
+
         return view('comentarioOperations.index', [
             'total_evid' => Avance::all(),
             'avance' => $avance
@@ -34,8 +36,8 @@ class ComentarioController extends Controller
      */
     public function create(Avance $avance)
     {
-        
-        return view('comentarioOperations.create',[
+
+        return view('comentarioOperations.create', [
             'avance' => $avance
         ]);
     }
@@ -43,7 +45,7 @@ class ComentarioController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -56,13 +58,27 @@ class ComentarioController extends Controller
 
         ]);
 
+        // avance en la ue se hace el avance
+        $avance = Avance::find(request('avance_id'));
+
+        // la bitacora a la ue pertenece el avance
+        $bitacora = $avance->bitacora;
+
+        // usuarios para recibir notificaciones sobre la bitacora
+        $users = $bitacora->users;
+
+        // enviar notificacion
+        foreach ($users as $us)
+            if ($us->rol == 'Estudiante')
+                $us->notify(new NotificateComentario($avance->create_at, $bitacora->titulo));
+
         return view('home');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -73,7 +89,7 @@ class ComentarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -84,8 +100,8 @@ class ComentarioController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -96,7 +112,7 @@ class ComentarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
