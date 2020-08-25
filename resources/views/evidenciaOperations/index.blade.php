@@ -6,7 +6,8 @@
 
     <div class="container text-center">
 
-        <p class="display-4 my-4"> Todas las evidencias para Avance "{{ $avance->descripcion }}"</p>
+    <p class="display-4 my-4"> Todas las evidencias para Avance "{{ $avance->descripcion }}"</p>
+
 
         <hr>
 

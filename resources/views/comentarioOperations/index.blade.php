@@ -24,7 +24,7 @@
             @forelse($avance->comentarios as $comen)
                 <tr>
                     <td>{{$comen->nombre}}</td>
-                    <td>{{$comen->nombre_pofesor}}</td>
+                    <td>{{$comen->nombre_profesor}}</td>
                     <td>{{$comen->comentario}}</td>
                 </tr>
             @empty

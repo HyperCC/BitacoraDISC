@@ -50,7 +50,7 @@ class ComentarioController extends Controller
     {
         Comentario::create([
             'nombre' => request('nombre'),
-            'nombre_pofesor' => request('nombre_pofesor'),
+            'nombre_profesor' => request('nombre_profesor'),
             'comentario' => request('comentario'),
             'avance_id' => \request('avance_id')
 

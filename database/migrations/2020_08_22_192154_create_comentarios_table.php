@@ -17,7 +17,7 @@ class CreateComentariosTable extends Migration
             $table->bigIncrements('id');
 
             $table->string('nombre')->nullable();
-            $table->string('nombre_pofesor')->nullable();//cambiar a profesor
+            $table->string('nombre_profesor')->nullable();//cambiar a profesor
             $table->string('comentario')->nullable();
             
             $table->bigInteger('avance_id')->unsigned();

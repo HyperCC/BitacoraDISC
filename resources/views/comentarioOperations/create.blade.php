@@ -19,7 +19,7 @@
 
                         @csrf
 
-                        <input type="hidden" name="nombre_pofesor" value="{{auth()->user()->name}}">
+                        <input type="hidden" name="nombre_profesor" value="{{auth()->user()->name}}">
 
                         <tbody>
                         <!-- Arreglar forelse para poder obtener la bitacora del usuario logueado -->

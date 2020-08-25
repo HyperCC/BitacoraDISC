@@ -31,4 +31,5 @@ class Avance extends Model
         return $this->hasMany(Comentario::class);
     }
 
+
 }
