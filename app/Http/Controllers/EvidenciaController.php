@@ -6,10 +6,12 @@ use App\Avance;
 use App\Bitacora;
 use App\Evidencia;
 use App\Http\Requests\SaveEvidenciaRequest;
+use App\Mail\NotificationToMail;
 use App\Notifications\NotificateAvance;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class EvidenciaController extends Controller
 {
@@ -62,8 +64,10 @@ class EvidenciaController extends Controller
 
         // enviar notificacion
         foreach ($users as $us)
-            if ($us->rol == 'Profesor' || $us->rol == 'Encargado Titulación')
+            if ($us->rol == 'Profesor' || $us->rol == 'Encargado Titulación') {
                 $us->notify(new NotificateAvance('Evidencia', $bitacora->titulo));
+                //Mail::to($us->email)->queue(new NotificationToMail);
+            }
 
         return view('home');
     }

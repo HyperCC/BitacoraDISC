@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comentario;
+use App\Mail\NotificationToMail;
 use App\Notifications\NotificateAvance;
 use App\Notifications\NotificateComentario;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use App\Evidencia;
 use App\Http\Requests\SaveEvidenciaRequest;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ComentarioController extends Controller
 {
@@ -69,8 +71,10 @@ class ComentarioController extends Controller
 
         // enviar notificacion
         foreach ($users as $us)
-            if ($us->rol == 'Estudiante')
+            if ($us->rol == 'Estudiante') {
                 $us->notify(new NotificateComentario($avance->create_at, $bitacora->titulo));
+                Mail::to($us->email)->queue(new NotificationToMail);
+            }
 
         return view('home');
     }

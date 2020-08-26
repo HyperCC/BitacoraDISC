@@ -6,6 +6,7 @@ use App\Avance;
 use App\Bitacora;
 use App\BitacoraUser;
 use App\Http\Requests\SaveBitacoraRequest;
+use App\Mail\NotificationToMail;
 use App\Notifications\NotificateComentario;
 use App\Notifications\NotificateFinalizacion;
 use App\User;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use function Sodium\compare;
 
@@ -172,8 +174,10 @@ class BitacoraController extends Controller
 
         // enviar notificacion
         foreach ($users as $us)
-            if (\auth()->user()->id !== $us->id)
+            if (\auth()->user()->id !== $us->id) {
                 $us->notify(new NotificateFinalizacion($bitacora->titulo));
+                //Mail::to($us->email)->queue(new NotificationToMail);
+            }
 
         return redirect()->route('bitacoras-index', $bitacora);
     }

@@ -1,6 +1,8 @@
 <?php
 
+use App\Mail\NotificationToMail;
 use App\Notifications\NotificateAvance;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    //auth()->user()->notify(new NotificateAvance('Avance', 'bita01'));
     return view('welcome');
 });
 
