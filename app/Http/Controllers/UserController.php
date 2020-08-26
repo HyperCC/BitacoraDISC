@@ -78,7 +78,7 @@ class UserController extends Controller
             $us->save();
         }
 
-        return redirect()->route('home')->with('flash', 'Usuario nuevo agregado correctamente!');
+        return redirect()->route('home')->with('flash', 'Usuario ' . $us->name . ' agregado correctamente!');
     }
 
     /**
@@ -110,9 +110,9 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param User $user
      * @return \Illuminate\Http\Response
+     * @throws ValidationException
      */
     public function update(User $user)
     {
@@ -150,7 +150,7 @@ class UserController extends Controller
             ]);
         }
 
-        return redirect()->route('users-show', $user);
+        return redirect()->route('users-show', $user)->with('flash', 'Usuario ' . $user->name . ' actualizado correctamente!');
     }
 
     public function remover(User $user)
@@ -159,6 +159,6 @@ class UserController extends Controller
             'estado' => request('estado'),
             'disponibilidad' => \request('disponibilidad')
         ]);
-        return redirect()->route('users-index', $user);
+        return redirect()->route('users-index', $user)->with('flash', 'Usuario ' . $user->name . ' removido correctamente!');
     }
 }

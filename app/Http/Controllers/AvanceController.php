@@ -78,14 +78,13 @@ class AvanceController extends Controller
                 //Mail::to($us->email)->queue(new NotificationToMail);
             }
 
-        return view('home');
+        return redirect()->route('home')->with('flash', 'Avance del ' . $avance->created_at . ' hecho por ' . $avance->nombre . 'agregado correctamente!');
     }
 
     //TODO: IMPLEMENTAR LA DESCARGA DE EVIDENCIAS
     public function getDownload(Evidencia $evidencia)
     {
         //PDF file is stored under project/public/ashjaks.pdf
-
 
         $file = storage_path('app/' . $evidencia->ubi_archivo);;
 

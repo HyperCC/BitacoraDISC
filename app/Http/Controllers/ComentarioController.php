@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comentario;
+use App\Http\Requests\SaveComentarioRequest;
 use App\Mail\NotificationToMail;
 use App\Notifications\NotificateAvance;
 use App\Notifications\NotificateComentario;
@@ -50,9 +51,9 @@ class ComentarioController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveComentarioRequest $request)
     {
-        Comentario::create([
+        $comentario = Comentario::create([
             'nombre' => request('nombre'),
             'nombre_profesor' => request('nombre_profesor'),
             'comentario' => request('comentario'),
@@ -73,10 +74,10 @@ class ComentarioController extends Controller
         foreach ($users as $us)
             if ($us->rol == 'Estudiante') {
                 $us->notify(new NotificateComentario($avance->create_at, $bitacora->titulo));
-                Mail::to($us->email)->queue(new NotificationToMail);
+                //Mail::to($us->email)->queue(new NotificationToMail);
             }
 
-        return view('home');
+        return redirect()->route('home')->with('flash', 'El Profesor ' . $comentario->nombre_profesor . ' agregó un nuevo comentario al Avance del ' . $avance->created_at);
     }
 
     /**

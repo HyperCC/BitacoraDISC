@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <script src="{{ mix('js/app.js') }}" defer></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
     <link rel="shortcut icon" href="{{{ asset('img/favicon.png') }}}">
 
@@ -25,8 +26,8 @@
         @yield('content_body')
     </main>
 
-    <footer class="bg-dark text-center text-light py-3 shadow" >
-        {{ config('app.name') }} | Copyright @ {{ date('Y') }}
+    <footer class="bg-dark text-center text-light py-3 shadow">
+        BitacoraDISC | Copyright @ {{ date('Y') }}
     </footer>
 
 </div>

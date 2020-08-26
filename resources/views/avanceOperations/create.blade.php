@@ -57,7 +57,7 @@
                                 <div class="form-group">
                                     <label for="archivo"> Archivo </label>
                                     <br>
-                                    <input accept="image/jpg, image/jpg, application/pdf, .docx" class="" name="archivo"
+                                    <input accept="image/jpg, image/png, application/pdf, .docx" class="" name="archivo"
                                            type="file">
                                 </div>
 
@@ -96,12 +96,23 @@
                             @endif
                         @endif
                     @endforeach
+
+                @elseif(auth()->user()->bitacoras->first()->estado == 'Finalizada')
+                    @if( auth()->user()->bitacoras->first()->causa_renuncia == 'No continuidad del trabajo' )
+                        <img class="img-fluid my-3" src="{{ URL::to('/')}}/img/cancel.svg"
+                             alt="finalización de bitacora ucn">
+                        <h1 class="text-center">Esta Bitacora ha finalizado debido a la no continuidad del trabajo. Lo sentimos.</h1>
+                    @else
+                        <img class="img-fluid my-3" src="{{ URL::to('/')}}/img/graduation.svg"
+                             alt="finalización de bitacora ucn">
+                        <h1 class="text-center">Esta Bitacora ha llegado a su finalización debido a su aprobación. Muchas feliciades!</h1>
+                    @endif
+
+                @else
+                    <h1 class="text-center">No tienes bitácoras inscritas.</h1>
+
                 @endif
 
-
-                @if(\Illuminate\Support\Facades\Auth::user()->disponibilidad == 'Si')
-                    <h1>No tienes bitácoras inscritas.</h1>
-                @endif
             </div>
         </div>
     </div>

@@ -28,7 +28,10 @@ class BitacoraController extends Controller
      */
     public function index()
     {
-        return (Auth::user()->rol == 'Admin' or Auth::user()->rol == 'Encargado Titulación' or Auth::user()->rol == 'Secretaria') ? view('bitacorasOperations.index', ['bitacoras' => Bitacora::all()]) : view('bitacorasOperations.index', ['bitacoras' => Auth::user()->bitacoras]);
+        return (Auth::user()->rol == 'Admin' or Auth::user()->rol == 'Encargado Titulación'
+            or Auth::user()->rol == 'Secretaria') ?
+            view('bitacorasOperations.index', ['bitacoras' => Bitacora::all()])
+            : view('bitacorasOperations.index', ['bitacoras' => Auth::user()->bitacoras]);
     }
 
     /**
@@ -76,7 +79,7 @@ class BitacoraController extends Controller
         $this->asignUsers(request('id_profesor1'), $bita);
         $this->asignUsers(request('id_profesor2'), $bita);
 
-        return redirect()->route('home');
+        return redirect()->route('home')->with('flash', 'Bitacora ' . $bita->titulo . ' agregada correctamente!');
     }
 
     // asignacion de relacio entre los usuarios y la bitacora, de 1 a 1
@@ -145,7 +148,7 @@ class BitacoraController extends Controller
             'causa_renuncia' => 'ninguna'
         ], $request->validated());
 
-        return redirect()->route('bitacoras-show', $bitacora);
+        return redirect()->route('bitacoras-show', $bitacora)->with('flash', 'Bitacora ' . $bitacora->titulo . ' actualizado correctamente!');
     }
 
     /**
@@ -179,7 +182,7 @@ class BitacoraController extends Controller
                 //Mail::to($us->email)->queue(new NotificationToMail);
             }
 
-        return redirect()->route('bitacoras-index', $bitacora);
+        return redirect()->route('bitacoras-index', $bitacora)->with('flash', 'Bitacora ' . $bitacora->titulo . ' finalizada correctamente!');
     }
 
 }

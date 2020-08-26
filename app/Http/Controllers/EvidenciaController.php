@@ -19,7 +19,7 @@ class EvidenciaController extends Controller
      * Display a listing of the resource.
      *
      * @param Avance $avance
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function index(Avance $avance)
     {
@@ -33,7 +33,7 @@ class EvidenciaController extends Controller
      * Show the form for creating a new resource.
      *
      * @param SaveEvidenciaRequest $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     // SUBIR UNA EVIDENCIA PARA ALGUN AVANCE
     public function create()
@@ -49,7 +49,7 @@ class EvidenciaController extends Controller
      */
     public function store(SaveEvidenciaRequest $request)
     {
-        Evidencia::create([
+        $evidencia = Evidencia::create([
             'ubi_archivo' => request('archivo')->store('public'),
             'name_alumno' => request('name_user'),
             'name_evid' => \request('name_evid'),
@@ -69,7 +69,7 @@ class EvidenciaController extends Controller
                 //Mail::to($us->email)->queue(new NotificationToMail);
             }
 
-        return view('home');
+        return redirect()->route('home')->with('flash', 'Evidencia del ' . $evidencia->created_at . ' hecha por ' . $evidencia->name_alumno . ' agregada correctamente!');
     }
 
     /**

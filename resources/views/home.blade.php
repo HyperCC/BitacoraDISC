@@ -119,24 +119,48 @@
                 @endif
 
             <!-- CUALUIER AUTENTICADO PUEDE VER LAS BITACORAS CORRESPONDIENTES-->
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
-                    <div class="card mb-4 box-shadow">
-                        <div class="card-header bg-success">
-                            <h5 class="my-0 font-weight-normal text-light"> Todos </h5>
+                @if(\Illuminate\Support\Facades\Auth::user()->rol != 'Profesor')
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-header bg-success">
+                                <h5 class="my-0 font-weight-normal text-light"> Todos </h5>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title pircing-card-title">Ver Bitacoras</h3>
+                                <p class="text-muted"> Analizar todos los datos asignados a una Bitacora. Tambien se
+                                    pueden
+                                    editar segun rol
+                                </p>
+                            </div>
+                            <a href="{{ route('bitacoras-index') }}"
+                               class="btn m-3 btn-outline-success btn-lg rounded-pill">
+                                ¡Ir a ver!
+                            </a>
                         </div>
-                        <div class="card-body">
-                            <h3 class="card-title pircing-card-title">Ver Bitacoras</h3>
-                            <p class="text-muted"> Analizar todos los datos asignados a una Bitacora. Tambien se pueden editar segun rol
-                            </p>
-                        </div>
-                        <a href="{{ route('bitacoras-index') }}"
-                           class="btn m-3 btn-outline-success btn-lg rounded-pill">
-                            ¡Ir a ver!
-                        </a>
                     </div>
-                </div>
+                @endif
 
-                @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante' or \Illuminate\Support\Facades\Auth::user()->rol=='Admin' )
+                @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Profesor')
+                    <div class="col-4 col-md-6 col-sm-12 mb-2">
+                        <div class="card mb-4 box-shadow">
+                            <div class="card-header bg-success">
+                                <h5 class="my-0 font-weight-normal text-light"> Todos </h5>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="card-title pircing-card-title">Ver Bitacoras</h3>
+                                <p class="text-muted"> Analizar todos los datos asignados a una Bitacora. Tambien se
+                                    pueden editar segun rol
+                                </p>
+                            </div>
+                            <a href="{{ route('bitacoras-index') }}"
+                               class="btn m-3 btn-outline-success btn-lg rounded-pill">
+                                ¡Ir a ver!
+                            </a>
+                        </div>
+                    </div>
+                @endif
+
+                @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante')
                     <div class="col-lg-4 col-md-6 col-sm-12 mb-2">
                         <div class="card mb-4 box-shadow">
                             <div class="card-header bg-primary">
