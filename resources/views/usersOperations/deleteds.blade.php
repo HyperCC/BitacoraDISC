@@ -40,6 +40,7 @@
                     <th> No hay ningún Usuario removido</th>
                 </tr>
             @endforelse
+
             </tbody>
         </table>
 

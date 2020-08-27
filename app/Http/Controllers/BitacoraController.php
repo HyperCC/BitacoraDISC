@@ -11,12 +11,14 @@ use App\Notifications\NotificateComentario;
 use App\Notifications\NotificateFinalizacion;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
+use function Sodium\add;
 use function Sodium\compare;
 
 class BitacoraController extends Controller
@@ -123,12 +125,27 @@ class BitacoraController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function edit(Bitacora $bitacora)
     {
+        $estudiantes = DB::select('select * from users where rol=:rol and disponibilidad=:disp', ['rol' => 'Estudiante', 'disp' => 'Si']);
+        $profesores = User::all();
+
+        $profeDisponibles = $profesores->diff($bitacora->users);
+
+        $bitaProfes = 0;
+        foreach ($bitacora->users as $user) {
+            if ($user->rol == 'Profesor' || $user->rol == 'Encargado Titulación') {
+                $bitaProfes++;
+            }
+        }
+
         return view('bitacorasOperations.edit', [
-            'bitacora' => $bitacora
+            'bitacora' => $bitacora,
+            'estudiantes' => $estudiantes,
+            'profesores' => $profeDisponibles,
+            'bitaProfes' => $bitaProfes
         ]);
     }
 
@@ -183,6 +200,82 @@ class BitacoraController extends Controller
             }
 
         return redirect()->route('bitacoras-index', $bitacora)->with('flash', 'Bitacora ' . $bitacora->titulo . ' finalizada correctamente!');
+    }
+
+    public function borrarRelacionProfesor(Bitacora $bitacora)
+    {
+        $cantProfes = 0;
+
+        // contar el total de personas dentro de la bitacora para validar su cantidad
+        foreach ($bitacora->users as $user) {
+            if ($user->rol == ('Profesor' || 'Encargado Titulación'))
+                $cantProfes++;
+        }
+
+    }
+
+
+    /**
+     * @param Bitacora $bitacora
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function borrarRelacion(Bitacora $bitacora)
+    {
+
+        $cantProfes = 0;
+        $cantAlumnos = 0;
+
+        // contar el total de personas dentro de la bitacora para validar su cantidad
+        foreach ($bitacora->users as $user) {
+            if ($user->rol == 'Profesor' || $user->rol == 'Encargado Titulación')
+                $cantProfes++;
+
+            if ($user->rol == 'Estudiante')
+                $cantAlumnos++;
+        }
+
+        // el usuario a eliminar
+        $estudiante = User::find(\request('user_id'));
+
+        // validar la cantidad de integrantes en bitacora
+        if ($estudiante->rol == 'Estudiante' && $cantAlumnos <= 1) {
+            throw ValidationException::withMessages([
+                'No se puede eliminar el Estudiante, ya que al menos debe haber 1',
+            ]);
+        }
+        if ($estudiante->rol == ('Profesor' || 'Encargado Titulación') && $cantProfes <= 1) {
+            throw ValidationException::withMessages([
+                'No se puede eliminar el Profesor, ya que al menos debe haber 1',
+            ]);
+        }
+
+        // borrar la relacion entre usaurio y bitacora
+        $relacion = BitacoraUser::where([['bitacora_id', '=', $bitacora->id]])->where([['user_id', '=', \request('user_id')]])->get()->each->delete();
+
+        $estudiante->update([
+            'disponibilidad' => 'Si']);
+        //$estudiante->save();
+
+        return redirect()->route('bitacoras-edit', $bitacora->id)->with('flash', 'Usuario ' . $estudiante->name . ' borrado de la Bitacora ' . $bitacora->titulo . ' correctamente!');
+    }
+
+    /**
+     * @param Bitacora $bitacora
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function relacionarProfesor(Bitacora $bitacora)
+    {
+        $bitacora = Bitacora::find(\request('bitacora_id'));
+        $profesor = User::find(request('id_profe'));
+
+        // agregar la nueva relacion
+        $relacion = BitacoraUser::create([
+            'bitacora_id' => \request('bitacora_id'),
+            'user_id' => \request('id_profe')
+        ]);
+
+        return redirect()->route('bitacoras-edit', $bitacora->id)->with('flash', 'Nuevo Profesor ' . $profesor->name . ' agregado a la Bitacora ' . $bitacora->titulo . ' correctamente!');
+
     }
 
 }

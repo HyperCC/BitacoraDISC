@@ -26,8 +26,10 @@ class UserController extends Controller
 
     public function deleteds()
     {
+        $consulta = DB::select('select * from users where estado=:estado', ['estado' => 'Removido']);
+
         return view('usersOperations.deleteds', [
-            'user' => User::all()
+            'user' => $consulta
         ]);
     }
 

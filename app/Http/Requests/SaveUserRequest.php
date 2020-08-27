@@ -40,6 +40,7 @@ class SaveUserRequest extends FormRequest
             'email.unique'=>'Este E-mail ya fue ingresado, intente con otro',
             'password.required'=>'Debe ingresar una contraseña',
             'password.min'=>'La contraseña debe ser de al menos 8 caracteres',
+            'rut.min'=>'El rut debe ser de al menos 8 caracteres de largo para ser válido',
             'rol.required'=>'Debe elegir un rol'
         ];
     }

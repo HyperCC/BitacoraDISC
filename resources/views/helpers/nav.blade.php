@@ -1,8 +1,8 @@
-
 <nav class="navbar navbar-light navbar-expand-lg bg-primary shadow-sm">
 
     <div class="container">
 
+        <!-- ACCESO A PANTALLA PRINCIPAL (HOME) -->
         <a class="navbar-brand font-weight-bold text-light ml-3" href="{{ route('home') }}">
             <img src="{{ URL::to('/')}}/img/logo_bitacora_min_2.svg" width="120" height="40" loading="lazy">
         </a>
@@ -15,6 +15,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
             <ul class="navbar-nav mr-auto">
+
+                <!-- ACCESO AL HOME -->
                 <li class="nav-item mx-1">
                     <a class="nav-link text-light" href="{{ route('home') }}">
 
@@ -29,6 +31,7 @@
                         Home </a>
                 </li>
 
+                <!-- ACCESO A BITACORAS  -->
                 @auth()
                     <li class="nav-item mx-1">
                         <a class="nav-link text-light" href="{{ route('bitacoras-index') }}">
@@ -44,7 +47,9 @@
                             Bitácoras </a>
                     </li>
 
-                    @if(\Illuminate\Support\Facades\Auth::user()->rol=='Admin')
+                @if(\Illuminate\Support\Facades\Auth::user()->rol=='Admin')
+
+                    <!-- ACCESO A USUARIOS ACTIVOS  -->
                         <li class="nav-item">
                             <a class="nav-link text-light" href="{{ route('users-index') }}">
 
@@ -57,6 +62,7 @@
                                 Usuarios </a>
                         </li>
 
+                        <!-- ACCESO A USUARIOS REMOVIDOS  -->
                         <li class="nav-item mx-1">
                             <a class="nav-link text-light" href="{{ route('users-deleteds') }}">
 
@@ -71,6 +77,7 @@
 
                     @endif
 
+                <!-- ACCESO A NOTIFICACIONES -->
                     <li class="nav-item dropdown">
 
                         <div class="btn-group mx-1">
@@ -133,6 +140,22 @@
 
                     </li>
 
+                    <!-- ACCESO A AYUDA -->
+                    <li>
+                        <a class="nav-link text-light" href="#">
+
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-circle"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path
+                                    d="M5.25 6.033h1.32c0-.781.458-1.384 1.36-1.384.685 0 1.313.343 1.313 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.007.463h1.307v-.355c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.326 0-2.786.647-2.754 2.533zm1.562 5.516c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"/>
+                            </svg>
+
+                            Ayuda </a>
+                    </li>
+
+                    <!-- ACCESO A LA CUENTA DEL USAURIO -->
                     <li class="nav-item dropdown mx-1">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button"
                            data-toggle="dropdown"
@@ -174,5 +197,5 @@
 @extends('helpers.validate_errors')
 
 @if(session()->has('flash'))
-    <div class="alert alert-success">{{ session('flash') }}</div>
+    <div class="alert alert-success custom-select-lg">{{ session('flash') }}</div>
 @endif

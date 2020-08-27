@@ -23,89 +23,102 @@
                     <hr>
 
                     <div class="form-group">
-                        <label for="titulo"> Titulo </label>
+                        <label class="custom-select-lg" for="titulo"> Titulo </label>
                         <input class="form-control shadow-sm bg-light" name="titulo" type="text">
                     </div>
 
+                    <br>
+                    <hr>
+
                     <script>
-                        $(document).on('change', '.selectalumnos', function() {
+                        $(document).on('change', '.selectalumnos', function () {
                             $(this).closest('.form-group').siblings().find('.selectalumnos option[value="' + $(this).val() + '"]').remove();
                         });
                     </script>
 
                     <div class="form-group">
-                        <label for="id_estudiante1">Nombre Estudiante 1</label>
-                        <select class="form-control selectalumnos" name="id_estudiante1">
+                        <label class="custom-select-lg" for="id_estudiante1">Nombre Estudiante 1</label>
+                        <select class="form-control custom-select-lg selectalumnos" name="id_estudiante1">
 
-                            <option> Seleccione </option>
+                            <option> Seleccione</option>
                             @foreach($estudiantes as $estudiante)
-                                <option value="{{$estudiante->id}}"> {{$estudiante->email}} ({{$estudiante->name}})  </option>
+                                <option value="{{$estudiante->id}}"> {{$estudiante->email}} ({{$estudiante->name}})
+                                </option>
                             @endforeach
 
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="id_estudiante2">Nombre Estudiante 2</label>
-                        <select class="form-control selectalumnos" name="id_estudiante2">
+                        <label class="custom-select-lg" for="id_estudiante2">Nombre Estudiante 2</label>
+                        <select class="form-control custom-select-lg selectalumnos" name="id_estudiante2">
 
                             <option>Seleccione</option>
                             @foreach($estudiantes as $estudiante)
-                                <option value="{{$estudiante->id}}"> {{$estudiante->email}} ({{$estudiante->name}}) </option>
+                                <option value="{{$estudiante->id}}"> {{$estudiante->email}} ({{$estudiante->name}})
+                                </option>
                             @endforeach
 
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="id_estudiante3">Nombre Estudiante 3</label>
-                        <select class="form-control selectalumnos" name="id_estudiante3">
+                        <label class="custom-select-lg" for="id_estudiante3">Nombre Estudiante 3</label>
+                        <select class="form-control custom-select-lg selectalumnos" name="id_estudiante3">
 
                             <option>Seleccione</option>
                             @foreach($estudiantes as $estudiante)
-                                <option value="{{$estudiante->id}}"> {{$estudiante->email}} ({{$estudiante->name}}) </option>
+                                <option value="{{$estudiante->id}}"> {{$estudiante->email}} ({{$estudiante->name}})
+                                </option>
                             @endforeach
 
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="id_estudiante4">Nombre Estudiante 4</label>
-                        <select class="form-control selectalumnos" name="id_estudiante4">
+                        <label class="custom-select-lg" for="id_estudiante4">Nombre Estudiante 4</label>
+                        <select class="form-control custom-select-lg selectalumnos" name="id_estudiante4">
 
                             <option>Seleccione</option>
                             @foreach($estudiantes as $estudiante)
-                                <option value="{{$estudiante->id}}"> {{$estudiante->email}} ({{$estudiante->name}}) </option>
+                                <option value="{{$estudiante->id}}"> {{$estudiante->email}} ({{$estudiante->name}})
+                                </option>
                             @endforeach
 
                         </select>
                     </div>
+                    <br>
+                    <hr>
 
                     <script>
-                        $(document).on('change', '.selectprofesores', function() {
+                        $(document).on('change', '.selectprofesores', function () {
                             $(this).closest('.form-group').siblings().find('.selectprofesores option[value="' + $(this).val() + '"]').remove();
                         });
                     </script>
 
                     <div class="form-group">
-                        <label for="id_profesor1">Nombre Profesor 1</label>
-                        <select class="form-control selectprofesores" name="id_profesor1">
+                        <label class="custom-select-lg" for="id_profesor1">Nombre Profesor 1</label>
+                        <select class="form-control custom-select-lg selectprofesores" name="id_profesor1">
 
                             <option>Seleccione</option>
                             @foreach($profesores as $profesor)
-                                <option value="{{$profesor->id}}"> {{$profesor->email}} ({{$profesor->name}}) </option>
+                                <option class="text-capitalize" value="{{$profesor->id}}"> {{$profesor->email}}
+                                    ({{$profesor->name}})
+                                </option>
                             @endforeach
 
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="id_profesor1">Nombre Profesor 2</label>
-                        <select class="form-control selectprofesores" name="id_profesor2">
+                        <label class="custom-select-lg" for="id_profesor1">Nombre Profesor 2</label>
+                        <select class="form-control custom-select-lg selectprofesores" name="id_profesor2">
 
                             <option>Seleccione</option>
                             @foreach($profesores as $profesor)
-                                <option value="{{$profesor->id}}"> {{$profesor->email}} ({{$profesor->name}})) </option>
+                                <option class="text-capitalize" value="{{$profesor->id}}"> {{$profesor->email}}
+                                    ({{$profesor->name}}))
+                                </option>
                             @endforeach
 
                         </select>

@@ -2,6 +2,8 @@
 
 use App\Mail\NotificationToMail;
 use App\Notifications\NotificateAvance;
+use App\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -57,9 +59,12 @@ Route::get('bitacoras-index/', 'BitacoraController@index')->name('bitacoras-inde
 Route::get('bitacoras-edit/{bitacora}', 'BitacoraController@edit')->name('bitacoras-edit');
 Route::get('bitacoras-create/', 'BitacoraController@create')->name('bitacoras-create');
 Route::post('bitacoras-store/', 'BitacoraController@store')->name('bitacoras-store');
+Route::post('bitacoras-store-profesor/', 'BitacoraController@relacionarProfesor')->name('bitacoras-store-profesor');
 Route::get('bitacoras-show/{bitacora}', 'BitacoraController@show')->name('bitacoras-show');
 Route::patch('bitacoras-update/{bitacora}', 'BitacoraController@update')->name('bitacoras-update');
 Route::patch('bitacoras-remover/{bitacora}', 'BitacoraController@remover')->name('bitacoras-remover');
+Route::delete('bitacoras-borrar-relacion/{bitacora}', 'BitacoraController@borrarRelacion')->name('bitacoras-borrar-relacion');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 
