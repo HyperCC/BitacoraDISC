@@ -9,8 +9,9 @@
         <div class="row">
 
             <div class="col-12 col-sm-10 col-lg-6 mx-auto my-3">
-
-                @if(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante' & \Illuminate\Support\Facades\Auth::user()->disponibilidad == 'No'  & auth()->user()->bitacoras->first()->estado != 'Finalizada' )
+                @if(\Illuminate\Support\Facades\Auth::user()->disponibilidad == 'Si')
+                    <h1 class="text-center">No tienes bitácoras inscritas.</h1>
+                @elseif(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante' & \Illuminate\Support\Facades\Auth::user()->disponibilidad == 'No'  & auth()->user()->bitacoras->first()->estado != 'Finalizada' )
 
                     @foreach(auth()->user()->bitacoras as $bita)
 
@@ -110,9 +111,6 @@
                              alt="finalización de bitacora ucn">
                         <h1 class="text-center">Esta Bitacora ha llegado a su finalización debido a su aprobación. Muchas feliciades!</h1>
                     @endif
-
-                @else
-                    <h1 class="text-center">No tienes bitácoras inscritas.</h1>
 
                 @endif
 
