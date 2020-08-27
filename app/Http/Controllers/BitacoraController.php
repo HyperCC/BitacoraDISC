@@ -211,7 +211,6 @@ class BitacoraController extends Controller
             if ($user->rol == ('Profesor' || 'Encargado Titulación'))
                 $cantProfes++;
         }
-
     }
 
 
@@ -237,23 +236,29 @@ class BitacoraController extends Controller
         // el usuario a eliminar
         $estudiante = User::find(\request('user_id'));
 
+
         // validar la cantidad de integrantes en bitacora
-        if ($estudiante->rol == 'Estudiante' && $cantAlumnos <= 1) {
-            throw ValidationException::withMessages([
-                'No se puede eliminar el Estudiante, ya que al menos debe haber 1',
-            ]);
+        if ($estudiante->rol == 'Estudiante') {
+            if ($cantAlumnos <= 1) {
+                throw ValidationException::withMessages([
+                    'No se puede eliminar el Estudiante, ya que al menos debe haber 1',
+                ]);
+            }
         }
-        if ($estudiante->rol == ('Profesor' || 'Encargado Titulación') && $cantProfes <= 1) {
-            throw ValidationException::withMessages([
-                'No se puede eliminar el Profesor, ya que al menos debe haber 1',
-            ]);
+        if ($estudiante->rol == 'Profesor' || $estudiante->rol == 'Encargado Titulación') {
+            if ($cantProfes <= 1) {
+                throw ValidationException::withMessages([
+                    'No se puede eliminar el Profesor, ya que al menos debe haber 1',
+                ]);
+            }
         }
 
         // borrar la relacion entre usaurio y bitacora
         $relacion = BitacoraUser::where([['bitacora_id', '=', $bitacora->id]])->where([['user_id', '=', \request('user_id')]])->get()->each->delete();
 
         $estudiante->update([
-            'disponibilidad' => 'Si']);
+            'disponibilidad' => 'Si'
+        ]);
         //$estudiante->save();
 
         return redirect()->route('bitacoras-edit', $bitacora->id)->with('flash', 'Usuario ' . $estudiante->name . ' borrado de la Bitacora ' . $bitacora->titulo . ' correctamente!');
@@ -275,7 +280,5 @@ class BitacoraController extends Controller
         ]);
 
         return redirect()->route('bitacoras-edit', $bitacora->id)->with('flash', 'Nuevo Profesor ' . $profesor->name . ' agregado a la Bitacora ' . $bitacora->titulo . ' correctamente!');
-
     }
-
 }
