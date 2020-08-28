@@ -21,41 +21,41 @@
                     <hr>
 
                     <div class="form-group">
-                        <label for="name"> Nombre </label>
+                        <label class="custom-select-lg" for="name"> Nombre </label>
                         <input class="form-control shadow-sm bg-light" name="name" type="text">
                     </div>
 
                     <div class="form-group">
-                        <label for="email"> Correo </label>
+                        <label class="custom-select-lg" for="email"> Correo </label>
                         <input class="form-control shadow-sm bg-light" name="email" type="email">
                     </div>
 
                     <div class="form-group">
-                        <label for="carrera"> Carrera </label>
+                        <label class="custom-select-lg" for="carrera"> Carrera </label>
                         <select class="form-control shadow-sm custom-select" name="carrera">
-                            <option> No aplica</option>
-                            <option> ICCI</option>
-                            <option> IenCI</option>
+                            <option class="custom-select-lg"> No aplica</option>
+                            <option class="custom-select-lg"> ICCI</option>
+                            <option class="custom-select-lg"> IenCI</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="name"> Rut </label>
+                        <label class="custom-select-lg" for="name"> Rut </label>
                         <input class="form-control shadow-sm bg-light" name="rut" type="text">
                     </div>
 
                     <div class="form-group">
-                        <label for="rol"> Rol </label>
+                        <label class="custom-select-lg" for="rol"> Rol </label>
                         <select class="form-control shadow-sm custom-select" name="rol">
-                            <option>Estudiante</option>
-                            <option>Profesor</option>
-                            <option>Secretaria</option>
-                            <option>Encargado Titulación</option>
+                            <option class="custom-select-lg">Estudiante</option>
+                            <option class="custom-select-lg">Profesor</option>
+                            <option class="custom-select-lg">Secretaria</option>
+                            <option class="custom-select-lg">Encargado Titulación</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="password"> Contraseña </label>
+                        <label class="custom-select-lg" for="password"> Contraseña </label>
                         <input class="form-control shadow-sm bg-light" name="password" type="password">
                     </div>
 

@@ -47,7 +47,7 @@
                             Bitácoras </a>
                     </li>
 
-                @if(\Illuminate\Support\Facades\Auth::user()->rol=='Admin')
+                    @if(\Illuminate\Support\Facades\Auth::user()->rol=='Admin')
 
                     <!-- ACCESO A USUARIOS ACTIVOS  -->
                         <li class="nav-item">
@@ -142,7 +142,8 @@
 
                     <!-- ACCESO A AYUDA -->
                     <li>
-                        <a class="nav-link text-light" target="_blank" href="https://www.youtube.com/playlist?list=PLNEeqY1Kb6lZmO11bKWTfy7d-wvqJempP">
+                        <a class="nav-link text-light" target="_blank"
+                           href="https://www.youtube.com/playlist?list=PLNEeqY1Kb6lZmO11bKWTfy7d-wvqJempP">
 
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-question-circle"
                                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -176,7 +177,7 @@
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
+                                Cerrar sesión
                             </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
@@ -197,5 +198,5 @@
 @extends('helpers.validate_errors')
 
 @if(session()->has('flash'))
-    <div class="alert alert-success custom-select-lg">{{ session('flash') }}</div>
+    <div class="alert alert-success custom-select-lg py-3">{{ session('flash') }}</div>
 @endif

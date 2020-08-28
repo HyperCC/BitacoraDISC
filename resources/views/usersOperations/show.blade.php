@@ -98,6 +98,7 @@
 
                                                 <!-- Modal | Mensaje de alerta para confirmacion de eliminacion de un usuario -->
                                                 @include('helpers.modalEliminarUsuario')
+
                                             @else
                                                 <a class="btn btn-lg btn-outline-danger btn-block rounded-pill"
                                                    data-toggle="modal" data-target="#reactivarUsuario" type="submit">

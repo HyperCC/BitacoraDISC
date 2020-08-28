@@ -1,12 +1,15 @@
 @extends('helpers.template')
+
 @section('title_head', 'Editar Bitacora')
+
 @section('content_body')
 
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
     <script>
         //Funcion Jquery que desactiva el boton guardar nuevos profes si en la lista esta seleccionado "seleccione"
-        $(function() {
-            $("#select_profe").change(function() {
+        $(function () {
+            $("#select_profe").change(function () {
                 if ($(this).val() === "Seleccione") {
                     $("#btn_guardar").prop("disabled", true);
                 } else {
@@ -17,7 +20,6 @@
         });
 
     </script>
-
 
     <div class="container">
 
@@ -43,7 +45,7 @@
                                 <h5>Titulo</h5>
                             </label>
                             <input class="form-control shadow-sm bg-light" name="titulo" type="text"
-                                value="{{ old('titulo', $bitacora->titulo) }}">
+                                   value="{{ old('titulo', $bitacora->titulo) }}">
                         </div>
 
                         <input type="hidden" value="{{ old('estado', $bitacora->estado) }}" name="estado">
@@ -55,7 +57,8 @@
                                     Bitacora?</label>
                                 <br>
                                 <span class="ml-4">
-                                    <input class="form-check-input" type="checkbox" name="estado" value="Activa"> Si</span>
+                                    <input class="form-check-input" type="checkbox" name="estado"
+                                           value="Activa"> Si</span>
                             </div>
                         @endif
 
@@ -70,44 +73,45 @@
                         <hr>
                     </form>
 
-
                     <!-- TABLA DE ALUMNOS -->
                     <div class="mx-auto">
                         <h5 class="custom-select-lg mt-lg-3"> Alumnos actuales: </h5>
                         <table class="table table-hover table-responsive-sm">
                             <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">E-mail</th>
-                                    <th scope="col">Rol</th>
-                                    <th scope="col"> Accion</th>
-                                </tr>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Rol</th>
+                                <th scope="col"> Accion</th>
+                            </tr>
                             </thead>
 
                             <tbody>
-                                @forelse($bitacora->users as $us)
-                                    @if ($us->rol == 'Estudiante')
-                                        <tr>
-                                            <td> {{ $us->name }}</td>
-                                            <td> {{ $us->email }}</td>
-                                            <td> {{ $us->rol }}</td>
-                                            <td>
-                                                <form method="POST"
-                                                    action="{{ route('bitacoras-borrar-relacion', $bitacora) }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <input type="hidden" name="user_id" value="{{ $us->id }}">
-                                                    <button class="btn btn-danger px-3" type="submit"> Eliminar</button>
-                                                </form>
-                                            </td>
-
-                                        </tr>
-                                    @endif
-                                @empty
+                            @forelse($bitacora->users as $us)
+                                @if ($us->rol == 'Estudiante')
                                     <tr>
-                                        <th> No hay Alumnos</th>
+                                        <td> {{ $us->name }}</td>
+                                        <td> {{ $us->email }}</td>
+                                        <td> {{ $us->rol }}</td>
+                                        <td>
+                                            <form method="POST"
+                                                  action="{{ route('bitacoras-borrar-relacion', $bitacora) }}">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <input type="hidden" name="user_id" value="{{ $us->id }}">
+                                                <button class="btn btn-danger px-3" type="submit"> Eliminar</button>
+
+                                            </form>
+                                        </td>
+
                                     </tr>
-                                @endforelse
+                                @endif
+                            @empty
+                                <tr>
+                                    <th> No hay Alumnos</th>
+                                </tr>
+                            @endforelse
                             </tbody>
 
                         </table>
@@ -119,38 +123,39 @@
                         <h5 class="custom-select-lg mt-lg-3"> Profesores actuales: </h5>
                         <table class="table table-hover table-responsive-sm">
                             <thead class="thead-dark">
-                                <tr>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">E-mail</th>
-                                    <th scope="col">Rol</th>
-                                    <th scope="col"> Accion</th>
-                                </tr>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">E-mail</th>
+                                <th scope="col">Rol</th>
+                                <th scope="col"> Accion</th>
+                            </tr>
                             </thead>
 
                             <tbody>
-                                @forelse($bitacora->users as $us)
-                                    @if ($us->rol == 'Profesor' || $us->rol == 'Encargado Titulación')
-                                        <tr>
-                                            <td> {{ $us->name }}</td>
-                                            <td> {{ $us->email }}</td>
-                                            <td> {{ $us->rol }}</td>
-                                            <td>
-                                                <form method="POST"
-                                                    action="{{ route('bitacoras-borrar-relacion', $bitacora) }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <input type="hidden" name="user_id" value="{{ $us->id }}">
-                                                    <button class="btn btn-danger px-3" type="submit"> Eliminar</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endif
-
-                                @empty
+                            @forelse($bitacora->users as $us)
+                                @if ($us->rol == 'Profesor' || $us->rol == 'Encargado Titulación')
                                     <tr>
-                                        <th> No hay Profesores</th>
+                                        <td> {{ $us->name }}</td>
+                                        <td> {{ $us->email }}</td>
+                                        <td> {{ $us->rol }}</td>
+                                        <td>
+                                            <form method="POST" action="{{ route('bitacoras-borrar-relacion', $bitacora) }}">
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <input type="hidden" name="user_id" value="{{ $us->id }}">
+                                                <button class="btn btn-danger px-3" type="submit"> Eliminar</button>
+
+                                            </form>
+                                        </td>
                                     </tr>
-                                @endforelse
+                                @endif
+
+                            @empty
+                                <tr>
+                                    <th> No hay Profesores</th>
+                                </tr>
+                            @endforelse
                             </tbody>
 
                         </table>
@@ -166,9 +171,11 @@
                             <label for="id_estudiante1">
                                 <h5>Profesores disponibles para agregar:</h5>
                             </label>
-                            <select class="form-control selectalumnos" name="id_profe" id="select_profe" @if ($bitaProfes > 1) disabled @endif>
+                            <select class="form-control selectalumnos" name="id_profe" id="select_profe"
+                                    @if ($bitaProfes > 1) disabled @endif>
 
                                 <option class="text-capitalize"> Seleccione</option>
+
                                 @forelse($profesores as $us)
                                     @if ($us->rol == 'Profesor' || $us->rol == 'Encargado Titulación')
                                         <option class="text-capitalize custom-select-lg" value="{{ $us->id }}">
@@ -185,12 +192,13 @@
 
 
                         <div class="py-3">
-                            <button class="btn btn-primary btn-lg btn-block rounded-pill" type="submit" id="btn_guardar" disabled>
+                            <button class="btn btn-primary btn-lg btn-block rounded-pill" type="submit" id="btn_guardar"
+                                    disabled>
                                 Guardar Nuevos Profesores
                             </button>
 
                             <a class="btn btn-lg btn-block btn-outline-dark rounded-pill"
-                                href="{{ route('bitacoras-index') }}"> Cancelar </a>
+                               href="{{ route('bitacoras-index') }}"> Cancelar </a>
                         </div>
 
                     </form>

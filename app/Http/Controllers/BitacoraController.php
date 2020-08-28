@@ -236,7 +236,6 @@ class BitacoraController extends Controller
         // el usuario a eliminar
         $estudiante = User::find(\request('user_id'));
 
-
         // validar la cantidad de integrantes en bitacora
         if ($estudiante->rol == 'Estudiante') {
             if ($cantAlumnos <= 1) {
@@ -245,6 +244,7 @@ class BitacoraController extends Controller
                 ]);
             }
         }
+
         if ($estudiante->rol == 'Profesor' || $estudiante->rol == 'Encargado Titulación') {
             if ($cantProfes <= 1) {
                 throw ValidationException::withMessages([

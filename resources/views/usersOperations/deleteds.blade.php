@@ -37,7 +37,7 @@
                 @endif
             @empty
                 <tr>
-                    <th> No hay ningún Usuario removido</th>
+                    <td> No hay ningún Usuario removido</td>
                 </tr>
             @endforelse
 

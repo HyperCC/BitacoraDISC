@@ -11,7 +11,7 @@
             <div class="col-12 col-sm-10 col-lg-6 mx-auto my-3">
                 @if(\Illuminate\Support\Facades\Auth::user()->disponibilidad == 'Si')
                     <h1 class="text-center">No tienes bitácoras inscritas.</h1>
-                    
+
                 @elseif(\Illuminate\Support\Facades\Auth::user()->rol == 'Estudiante' & \Illuminate\Support\Facades\Auth::user()->disponibilidad == 'No' & auth()->user()->bitacoras->first()->estado != 'Finalizada' )
 
                     @foreach(auth()->user()->bitacoras as $bita)
@@ -43,13 +43,11 @@
 
                                 <hr>
 
-                                <div class="form-group">
-                                    <input class="form-control shadow-sm bg-light" name="name" type="hidden"
-                                           value="{{auth()->user()->name}}">
-                                </div>
+                                <input class="form-control shadow-sm bg-light" name="name" type="hidden"
+                                       value="{{auth()->user()->name}}">
 
                                 <div class="form-group">
-                                    <label for="descripcion"> Descripción avance </label>
+                                    <label class="custom-select-lg" for="descripcion"> Descripción avance </label>
                                     <input class="form-control shadow-sm bg-light" name="descripcion" type="text">
                                 </div>
 
@@ -57,7 +55,7 @@
                                        value="Indefinido">
 
                                 <div class="form-group">
-                                    <label for="archivo"> Archivo </label>
+                                    <label class="custom-select-lg" for="archivo"> Adjuntar Evidencia </label>
                                     <br>
                                     <input accept="image/jpg, image/png, application/pdf, .docx" class="" name="archivo"
                                            type="file">
@@ -103,15 +101,17 @@
                     @if( auth()->user()->bitacoras->first()->causa_renuncia == 'No continuidad del trabajo' )
                         <img class="img-fluid my-3" src="{{ URL::to('/')}}/img/cancel.svg"
                              alt="finalización de bitacora ucn">
-                        <h1 class="text-center">Esta Bitacora ha finalizado debido a la no continuidad del trabajo. Lo sentimos.</h1>
+                        <h1 class="text-center">Esta Bitacora ha finalizado debido a la no continuidad del trabajo. Lo
+                            sentimos.</h1>
                     @else
                         <img class="img-fluid my-3" src="{{ URL::to('/')}}/img/graduation.svg"
                              alt="finalización de bitacora ucn">
-                        <h1 class="text-center">Esta Bitacora ha llegado a su finalización debido a su aprobación. Muchas feliciades!</h1>
+                        <h1 class="text-center">Esta Bitacora ha llegado a su finalización debido a su aprobación.
+                            Muchas feliciades!</h1>
                     @endif
 
-                
-                    
+                @else
+                    <h1 class="text-center">No tienes bitácoras inscritas.</h1>
 
                 @endif
 

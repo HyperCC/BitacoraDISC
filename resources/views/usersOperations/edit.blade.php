@@ -23,51 +23,58 @@
                     <hr>
 
                     <div class="form-group">
-                        <label for="name"> Nombre </label>
+                        <label class="custom-select-lg" for="name"> Nombre </label>
                         <input class="form-control shadow-sm bg-light" name="name" type="text"
                                value="{{ old('name', $user->name) }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="email"> Correo </label>
+                        <label class="custom-select-lg" for="email"> Correo </label>
                         <input class="form-control shadow-sm bg-light" name="email" type="email"
                                value="{{ old('email', $user->email) }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="rut"> Rut </label>
+                        <label class="custom-select-lg" for="rut"> Rut </label>
                         <input class="form-control shadow-sm bg-light" name="rut" type="text"
                                value="{{ old('rut', $user->rut) }}">
                     </div>
 
                     <div class="form-group">
-                        <label for="carrera"> Carrera </label>
+                        <label class="custom-select-lg" for="carrera"> Carrera </label>
                         <select class="form-control shadow-sm custom-select" name="carrera">
-                            <option @if($user->carrera=='No aplica') selected @endif> No aplica</option>
-                            <option @if($user->carrera=='ICCI') selected @endif> ICCI</option>
-                            <option @if($user->carrera=='IenCI') selected @endif> IenCI</option>
+                            <option class="custom-select-lg" @if($user->carrera=='No aplica') selected @endif> No
+                                aplica
+                            </option>
+                            <option class="custom-select-lg" @if($user->carrera=='ICCI') selected @endif> ICCI</option>
+                            <option class="custom-select-lg" @if($user->carrera=='IenCI') selected @endif> IenCI
+                            </option>
                         </select>
                     </div>
 
 
                     <div class="form-group">
-                        <label for="rol"> Rol </label>
+                        <label class="custom-select-lg" for="rol"> Rol </label>
                         <select class="form-control shadow-sm custom-select" name="rol">
                             <!-- mostrar como seleccionado la opcion guardada en la DB -->
-                            <option @if($user->rol=='Estudiante') selected @endif>Estudiante</option>
-                            <option @if($user->rol=='Profesor') selected @endif >Profesor</option>
-                            <option @if($user->rol=='Secretaria') selected @endif>Secretaria</option>
-                            <option @if($user->rol=='Encargado Titulación') selected @endif>Encargado Titulación
+                            <option class="custom-select-lg" @if($user->rol=='Estudiante') selected @endif>Estudiante
+                            </option>
+                            <option class="custom-select-lg" @if($user->rol=='Profesor') selected @endif >Profesor
+                            </option>
+                            <option class="custom-select-lg" @if($user->rol=='Secretaria') selected @endif>Secretaria
+                            </option>
+                            <option class="custom-select-lg" @if($user->rol=='Encargado Titulación') selected @endif>
+                                Encargado Titulación
                             </option>
                         </select>
                     </div>
 
                     <!-- por el momento da error de seguridad esta manera de cambiar la clave -->
                     <div class="form-group">
-                        <label for="password"> Nueva Contraseña </label>
+                        <label class="custom-select-lg" for="password"> Nueva Contraseña </label>
                         <input class="form-control shadow-sm bg-light" name="password" type="password" value="">
                     </div>
-
+                    <br>
                     <hr>
 
                     <div class="py-3">
