@@ -15,6 +15,7 @@ class UserSecretariaSeeder extends Seeder
             'name' => 'evel',
             'email' => 'evel@gmail.com',
             'rol' => 'Secreataria',
+            'disponibilidad'=> 'No',
             'password' => Hash::make('evelevel')
         ]);
     }
