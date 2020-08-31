@@ -11,7 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(UserAdminSeeder::class);
+        //$this->call(UserAdminSeeder::class);
+        $this->call(UserSecretariaSeeder::class);
 
         // para ejecutar el seeder #php artisan db:seed
     }
