@@ -14,7 +14,7 @@ class UserSecretariaSeeder extends Seeder
         \App\User::create([
             'name' => 'evel',
             'email' => 'evel@gmail.com',
-            'rol' => 'Secreataria',
+            'rol' => 'Secretaria',
             'disponibilidad'=> 'No',
             'password' => Hash::make('evelevel')
         ]);
